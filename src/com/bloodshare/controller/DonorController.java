@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class StoryController {
+public class DonorController {
 
-	private static final Logger logger = LoggerFactory.getLogger(StoryController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DonorController.class);
 	
 	@RequestMapping("/sayHello")
     public String greeting() {

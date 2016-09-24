@@ -57,6 +57,7 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
 
+		<mapping class="com.bloodshare.entity.Donor"/>
     </session-factory>
 
 

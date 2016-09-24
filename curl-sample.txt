@@ -1,0 +1,26 @@
+curl  http://localhost:8080/help
+-------------- Create -----------
+
+curl  -v -H "Accept: text/plain" -H "Content-Type: text/plain" -X PUT --data "title:Hello Text body:Hello Rest API with Plain text author:saif " http://localhost:8080/create
+
+
+curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X PUT --data  "{\"id\":\"b\",\"name\":\"imran\",\"mobile\":\"0191501017\",\"bloodGroup\":\"o+\",\"birthDate\":61322400000}" http://localhost:8080/user/create
+
+-------------- Read -----------
+
+curl -v -H "Accept: application/json" http://localhost:8080/user/b
+
+curl -v -H "Accept: text/html" http://localhost:8080/read/1
+
+curl -v -H "Accept: text/richtext" http://localhost:8080/read/1
+
+-------------- Update -----------
+
+curl  -v -H "Accept: text/plain" -H "Content-Type: text/plain" -X POST --data "id:1 body:Hello Rest API from Plain text - this is Updated author:saif title:Hello Plain" http://localhost:8080/update
+
+
+curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data  "{\"id\":\"2\",\"title\":\"Hello Rest\",\"body\":\"Hello Rest API - Json - This is Updated\",\"author\":\"saif\"}" http://localhost:8080/update
+
+-------------- feed -----------
+
+curl -i -v http://localhost:8080/feed

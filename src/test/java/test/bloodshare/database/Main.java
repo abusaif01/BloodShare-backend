@@ -12,20 +12,20 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Session session = HibernateUtil.getSession();
-		Transaction transaction = session.beginTransaction();
-//		User user=new User();
-//		
-//		user.setName("test");
-//		user.setBirthDate(new Date());
-//		user.setId("xtz");
-//		user.setMobile("2136554");
-//		user.setBloodGroup("0+");
-//		session.save(user);
-		Donor user=(Donor) session.get(Donor.class , "abc");
-		System.out.println(user);
-		transaction.commit();
-		HibernateUtil.closeSession(session);
+//		Session session = HibernateUtil.getSession();
+//		Transaction transaction = session.beginTransaction();
+////		User user=new User();
+////		
+////		user.setName("test");
+////		user.setBirthDate(new Date());
+////		user.setId("xtz");
+////		user.setMobile("2136554");
+////		user.setBloodGroup("0+");
+////		session.save(user);
+//		Donor user=(Donor) session.get(Donor.class , "abc");
+//		System.out.println(user);
+//		transaction.commit();
+//		HibernateUtil.closeSession(session);
 	}
 	
 }

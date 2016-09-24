@@ -5,14 +5,14 @@ import java.util.Date;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.bloodshare.dao.DatabaseHelper;
 import com.bloodshare.entity.Donor;
+import com.bloodshare.util.HibernateUtil;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Session session = DatabaseHelper.getSession();
+		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 //		User user=new User();
 //		
@@ -25,7 +25,7 @@ public class Main {
 		Donor user=(Donor) session.get(Donor.class , "abc");
 		System.out.println(user);
 		transaction.commit();
-		DatabaseHelper.closeSession(session);
+		HibernateUtil.closeSession(session);
 	}
 	
 }

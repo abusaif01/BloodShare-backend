@@ -1,4 +1,4 @@
-package com.bloodshare.dao;
+package com.bloodshare.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,7 +10,7 @@ import com.bloodshare.entity.Donor;
 
 
 
-public class  DatabaseHelper {
+public class  HibernateUtil {
 
 
 	private static SessionFactory sessionFactory=null;

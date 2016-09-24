@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bloodshare.dao.DatabaseHelper;
 import com.bloodshare.entity.Donor;
+import com.bloodshare.util.HibernateUtil;
 
 
 @RestController
@@ -26,7 +26,7 @@ public class DonorController {
 	public ResponseEntity<Donor>  getDonor(@PathVariable("id") String donorId)
 	{
 		
-		Session session = DatabaseHelper.getSession();
+		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		Donor donor=(Donor) session.get(Donor.class, donorId);
 		logger.debug("Donor Found "+donor);

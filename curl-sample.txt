@@ -8,7 +8,10 @@ curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X 
 
 -------------- Read -----------
 
+curl -v -H "Accept: application/json" http://localhost:8080/hello
 curl -v -H "Accept: application/json" http://localhost:8080/user/b
+curl -v -H "Accept: application/json" http://bloodsharebd.herokuapp.com/user/b
+curl -v -H "Accept: application/json" http://bloodsharebd.herokuapp.com/hello
 
 curl -v -H "Accept: text/html" http://localhost:8080/read/1
 

@@ -5,14 +5,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.bloodshare.entity.Donor;
 
-public class DonorDAOImp implements DonorDAO
+@Repository
+public class DonorDAOImpl implements DonorDAO
 {
-	private static final Logger logger = LoggerFactory.getLogger(DonorDAOImp.class);
+	private static final Logger logger = LoggerFactory.getLogger(DonorDAOImpl.class);
 	
 	private SessionFactory sessionFactory;
+	public DonorDAOImpl() {
+		logger.debug(" DonorDAOImpl initilating");
+	}
 	
 	@Override
 	public void setSessionFactory(SessionFactory sf){
@@ -22,12 +27,14 @@ public class DonorDAOImp implements DonorDAO
 	
 	@Override
 	public Donor read(String donorId) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction= session.beginTransaction();
+		
 		Donor donor=(Donor) session.get(Donor.class, donorId);
 		logger.debug("Donor Found "+donor);
+		
 		transaction.commit();
-		session.close();
+		
 		return donor;
 	}
 
@@ -38,7 +45,7 @@ public class DonorDAOImp implements DonorDAO
 
 	@Override
 	public boolean save(Donor donor) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction= session.beginTransaction();
 		session.saveOrUpdate(donor);
 		logger.debug("Donor Saved.");
@@ -49,7 +56,6 @@ public class DonorDAOImp implements DonorDAO
 
 	@Override
 	public boolean delete(Donor t) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

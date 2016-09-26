@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bloodshare.entity.Donor;
@@ -27,6 +28,13 @@ public class DonorController {
 		this.donorService = donorService;
 	}
 	
+	@RequestMapping(value="/user/new/",method= RequestMethod.GET)
+	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
+	{
+		logger.debug("Checking user");
+		return new ResponseEntity<Boolean>(donorService.isUserNew(mobileNo),HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonor(@PathVariable("id") String donorId)
@@ -43,6 +51,5 @@ public class DonorController {
 		if(donorService.saveDonor(donor))
 		return new ResponseEntity<Boolean>(true,HttpStatus.CREATED);
 		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
-		
 	}
 }

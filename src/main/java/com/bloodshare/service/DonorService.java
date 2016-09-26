@@ -6,4 +6,7 @@ public interface DonorService {
 
 	public boolean saveDonor(Donor donor);
 	public Donor getDonor(String id);
+	public boolean isUserNew(String mobileNo);
+	public boolean loginDonor(String mobileNo);
+	
 }

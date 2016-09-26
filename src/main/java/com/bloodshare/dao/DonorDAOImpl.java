@@ -5,10 +5,10 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bloodshare.entity.Donor;
@@ -23,7 +23,7 @@ public class DonorDAOImpl implements DonorDAO
 		logger.debug(" DonorDAOImpl initilating");
 	}
 	
-	@Override
+	@Autowired
 	public void setSessionFactory(SessionFactory sf){
 		this.sessionFactory = sf;
 	}
@@ -32,13 +32,8 @@ public class DonorDAOImpl implements DonorDAO
 	@Override
 	public Donor read(String donorId) {
 		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction= session.beginTransaction();
-		
 		Donor donor=(Donor) session.get(Donor.class, donorId);
 		logger.debug("Donor Found "+donor);
-		
-		transaction.commit();
-		
 		return donor;
 	}
 
@@ -50,10 +45,9 @@ public class DonorDAOImpl implements DonorDAO
 	@Override
 	public boolean save(Donor donor) {
 		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction= session.beginTransaction();
 		session.saveOrUpdate(donor);
+		
 		logger.debug("Donor Saved.");
-		transaction.commit();
 		return true;
 	}
 

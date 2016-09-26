@@ -1,6 +1,12 @@
 curl  http://localhost:8080/help
 -------------- Create -----------
-
+{
+  "id": "b",
+  "name": "imran",
+  "mobile": "0191501017",
+  "bloodGroup": "o+",
+  "birthDate": 61322400000
+}
 
 curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X PUT --data  "{\"id\":\"b\",\"name\":\"imran\",\"mobile\":\"0191501017\",\"bloodGroup\":\"o+\",\"birthDate\":61322400000}" http://localhost:8080/user/create
 

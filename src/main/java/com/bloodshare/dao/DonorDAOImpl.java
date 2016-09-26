@@ -1,8 +1,12 @@
 package com.bloodshare.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -50,13 +54,22 @@ public class DonorDAOImpl implements DonorDAO
 		session.saveOrUpdate(donor);
 		logger.debug("Donor Saved.");
 		transaction.commit();
-		session.close();
 		return true;
 	}
 
 	@Override
 	public boolean delete(Donor t) {
 		return false;
+	}
+
+	@Override
+	public List<Donor> readDonorWithMobileNo(String mobileNo) {
+		Session session=sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Donor.class);
+		cr.add(Restrictions.eqOrIsNull("", mobileNo));
+		List<Donor> list = cr.list();
+		session.close();
+		return list;
 	}
 
 }

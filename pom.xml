@@ -155,7 +155,4 @@
 		</dependency>
 	</dependencies>
   
-	<modules>
-		<module>?</module>
-	</modules>
 </project>

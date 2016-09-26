@@ -50,7 +50,6 @@ public class DonorDAOImpl implements DonorDAO
 		session.saveOrUpdate(donor);
 		logger.debug("Donor Saved.");
 		transaction.commit();
-		session.close();
 		return true;
 	}
 

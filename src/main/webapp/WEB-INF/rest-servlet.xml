@@ -13,5 +13,34 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
    <context:component-scan base-package="com.bloodshare.controller,com.bloodshare.service,com.bloodshare.dao">
    </context:component-scan>                 
    <mvc:annotation-driven enable-matrix-variables="true"/>
+   <tx:annotation-driven/>
    
+   
+   
+   
+	<bean id="pgDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url"
+			value="jdbc:postgresql://ec2-54-243-126-40.compute-1.amazonaws.com:5432/daf755fk5a6o78?sslmode=require&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;user=pkzqnwdmlguesu&amp;password=jNzMNNJfmakJnaxvJ_ECYWofhn" />
+	</bean>
+	
+   
+   <bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="pgDataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.bloodshare.entity.Donor</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+   
+   <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" /> 
+	</bean>
 </beans>

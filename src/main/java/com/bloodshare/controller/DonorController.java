@@ -28,11 +28,13 @@ public class DonorController {
 		this.donorService = donorService;
 	}
 	
-	@RequestMapping(value="/user/new/",method= RequestMethod.GET)
+	@RequestMapping(value="/user/check_isnew_send_otp/",method= RequestMethod.GET)
 	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
 	{
 		logger.debug("Checking user");
-		return new ResponseEntity<Boolean>(donorService.isUserNew(mobileNo),HttpStatus.OK);
+		boolean isNew=donorService.isUserNew(mobileNo);
+		
+		return new ResponseEntity<Boolean>(isNew,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 

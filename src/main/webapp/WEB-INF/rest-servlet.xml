@@ -30,6 +30,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 		<property name="annotatedClasses">
 			<list>
 				<value>com.bloodshare.entity.Donor</value>
+				<value>com.bloodshare.entity.Otp</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

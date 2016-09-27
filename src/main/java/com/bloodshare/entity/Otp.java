@@ -5,14 +5,21 @@ import javax.persistence.Entity;
 @Entity
 public class Otp {
 	
-	private String mobileNo;
+	private String mobile;
 	private String key;
 	
-	public String getMobileNo() {
-		return mobileNo;
+	public Otp() {
 	}
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
+	
+	public Otp(String mobile, String key) {
+		this.mobile = mobile;
+		this.key = key;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	public String getKey() {
 		return key;

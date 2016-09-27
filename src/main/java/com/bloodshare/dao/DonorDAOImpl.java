@@ -60,9 +60,8 @@ public class DonorDAOImpl implements DonorDAO
 	public List<Donor> readDonorWithMobileNo(String mobileNo) {
 		Session session=sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Donor.class);
-		cr.add(Restrictions.eqOrIsNull("", mobileNo));
+		cr.add(Restrictions.eq("mobile", mobileNo));
 		List<Donor> list = cr.list();
-		session.close();
 		return list;
 	}
 

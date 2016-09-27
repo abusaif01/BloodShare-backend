@@ -25,6 +25,9 @@ public class Donor {
 	@Column(name="birthdate")
 	private Date birthDate;
 
+	private String status;
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -63,6 +66,14 @@ public class Donor {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bloodshare.entity.Donor;
+import com.bloodshare.entity.DonorOtp;
 import com.bloodshare.service.DonorOtpService;
 import com.bloodshare.service.DonorService;
 
@@ -34,10 +35,10 @@ public class DonorController {
 		this.donorOtpService = donorOtpService;
 	}
 
-	@RequestMapping(value="/user/check_isnew_send_otp/",method= RequestMethod.GET)
+	@RequestMapping(value="/user/check_isnew_send_otp",method= RequestMethod.GET)
 	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
 	{
-		logger.debug("Checking user");
+		logger.debug("Checking user if new");
 		boolean isNew=donorService.isUserNew(mobileNo);
 		try {
 			boolean isSendSuccessfull=donorOtpService.sendOtp(mobileNo);
@@ -51,20 +52,36 @@ public class DonorController {
 		
 	}
 	
+	@RequestMapping(value="/user/authenticate",consumes="application/json",method=RequestMethod.POST)
+	public ResponseEntity<Boolean> checkMobileNumber(@RequestBody DonorOtp donorOtp)
+	{
+		try {
+			boolean isAuthenticated=donorOtpService.autheticateOtp(donorOtp);
+			if(isAuthenticated)
+			return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			return new ResponseEntity<Boolean>(false,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
+	}
 	
-	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 
+	@RequestMapping(value="/user/get/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonor(@PathVariable("id") String donorId)
 	{
-		logger.debug(donorService.toString());
+		logger.debug("retriving user with ID");
 		
 		return new ResponseEntity<Donor>(donorService.getDonor(donorId),HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/user/create", method = RequestMethod.PUT, 
 			consumes="application/json")
-	public ResponseEntity<Boolean>  getDonor(@RequestBody Donor donor)
+	public ResponseEntity<Boolean>  createDonor(@RequestBody Donor donor)
 	{
+		logger.debug("Saving Donor");
+		
 		if(donorService.saveDonor(donor))
 		return new ResponseEntity<Boolean>(true,HttpStatus.CREATED);
 		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);

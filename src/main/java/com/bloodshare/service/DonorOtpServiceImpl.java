@@ -3,6 +3,7 @@ package com.bloodshare.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bloodshare.dao.DonorDAO;
@@ -13,7 +14,7 @@ import com.bloodshare.util.DonorStatus;
 import com.modules.otp.OtpGenerator;
 import com.modules.sms.service.SMSService;
 
-
+@Service
 public class DonorOtpServiceImpl implements DonorOtpService
 {
 

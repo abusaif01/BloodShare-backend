@@ -7,10 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.bloodshare.entity.Donor;
 import com.bloodshare.entity.DonorOtp;
 
+@Repository
 public class DonorOtpDAOImpl implements DonotOtpDAO
 {
 
@@ -49,7 +51,7 @@ public class DonorOtpDAOImpl implements DonotOtpDAO
 	public boolean isExist(DonorOtp otp) {
 		
 		Session session=sessionFactory.getCurrentSession();
-		Criteria cr = session.createCriteria(Donor.class);
+		Criteria cr = session.createCriteria(DonorOtp.class);
 		cr.add(Restrictions.eq("mobile", otp.getMobile()));
 		cr.add(Restrictions.eq("key", otp.getKey()));
 		List list = cr.list();

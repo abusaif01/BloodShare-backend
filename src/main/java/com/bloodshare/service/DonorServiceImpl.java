@@ -39,6 +39,7 @@ public class DonorServiceImpl implements DonorService
 		return donorDAO.read(id) ;
 	}
 
+	@Transactional
 	@Override
 	public boolean isUserNew(String mobileNo) {
 		List<Donor> list = donorDAO.readDonorWithMobileNo(mobileNo);

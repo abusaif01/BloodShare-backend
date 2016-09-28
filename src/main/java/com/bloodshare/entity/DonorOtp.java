@@ -1,10 +1,11 @@
 package com.bloodshare.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity(name="donor_otp")
 public class DonorOtp {
-	
+	@Id
 	private String mobile;
 	private String key;
 	

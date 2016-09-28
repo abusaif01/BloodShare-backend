@@ -4,7 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+
+import com.bloodshare.util.DonorStatus;
 
 @Entity
 public class Donor {
@@ -25,7 +29,8 @@ public class Donor {
 	@Column(name="birthdate")
 	private Date birthDate;
 
-	private String status;
+	@Enumerated(EnumType.ORDINAL)
+	private DonorStatus status;
 	
 	
 	public String getId() {
@@ -68,19 +73,19 @@ public class Donor {
 		this.birthDate = birthDate;
 	}
 	
-	public String getStatus() {
+	
+
+	public DonorStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(DonorStatus status) {
 		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "Donor [id=" + id + ", name=" + name + ", mobile=" + mobile + ", bloodGroup=" + bloodGroup
-				+ ", birthDate=" + birthDate + "]";
+				+ ", birthDate=" + birthDate + ", status=" + status + "]";
 	}
-	
-	
 }

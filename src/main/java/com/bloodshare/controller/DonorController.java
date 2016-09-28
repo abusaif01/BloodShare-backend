@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bloodshare.entity.Donor;
 import com.bloodshare.service.DonorService;
-import com.bloodshare.service.SMSService;
+import com.modules.sms.service.SMSService;
 
 
 @RestController

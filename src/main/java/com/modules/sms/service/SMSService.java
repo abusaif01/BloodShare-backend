@@ -1,4 +1,4 @@
-package com.bloodshare.service;
+package com.modules.sms.service;
 
 import com.bloodshare.entity.Otp;
 

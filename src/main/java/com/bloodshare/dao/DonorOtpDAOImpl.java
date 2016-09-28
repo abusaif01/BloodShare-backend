@@ -9,9 +9,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bloodshare.entity.Donor;
-import com.bloodshare.entity.Otp;
+import com.bloodshare.entity.DonorOtp;
 
-public class OtpDAOImpl implements OtpDAO
+public class DonorOtpDAOImpl implements DonotOtpDAO
 {
 
 	private SessionFactory sessionFactory;
@@ -22,31 +22,31 @@ public class OtpDAOImpl implements OtpDAO
 	}
 	
 	@Override
-	public Otp read(String id) {
+	public DonorOtp read(String id) {
 		throw new UnsupportedOperationException("Update not supported for OTP");
 	}
 
 	@Override
-	public Otp update(Otp t) {
+	public DonorOtp update(DonorOtp t) {
 		throw new UnsupportedOperationException("Update not supported for OTP");
 	}
 
 	@Override
-	public boolean save(Otp t) {
+	public boolean save(DonorOtp t) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(t);
 		return true;
 	}
 
 	@Override
-	public boolean delete(Otp t) {
+	public boolean delete(DonorOtp t) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(t);
 		return true;
 	}
 
 	@Override
-	public boolean isExist(Otp otp) {
+	public boolean isExist(DonorOtp otp) {
 		
 		Session session=sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Donor.class);

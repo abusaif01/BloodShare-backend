@@ -2,16 +2,16 @@ package com.bloodshare.entity;
 
 import javax.persistence.Entity;
 
-@Entity
-public class Otp {
+@Entity(name="donor_otp")
+public class DonorOtp {
 	
 	private String mobile;
 	private String key;
 	
-	public Otp() {
+	public DonorOtp() {
 	}
 	
-	public Otp(String mobile, String key) {
+	public DonorOtp(String mobile, String key) {
 		this.mobile = mobile;
 		this.key = key;
 	}

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bloodshare.entity.Donor;
+import com.bloodshare.service.DonorOtpService;
 import com.bloodshare.service.DonorService;
-import com.modules.sms.service.SMSService;
 
 
 @RestController
@@ -23,15 +23,15 @@ public class DonorController {
 	private static final Logger logger = LoggerFactory.getLogger(DonorController.class);
 	
 	private DonorService donorService;
-	private SMSService sMSService;
+	private DonorOtpService donorOtpService;
 	
 	@Autowired
 	public void setDonorService(DonorService donorService) {
 		this.donorService = donorService;
 	}
 	@Autowired
-	public void setSMSService(SMSService sMSService) {
-		this.sMSService = sMSService;
+	public void setDonorOtpService(DonorOtpService donorOtpService) {
+		this.donorOtpService = donorOtpService;
 	}
 
 	@RequestMapping(value="/user/check_isnew_send_otp/",method= RequestMethod.GET)
@@ -39,9 +39,18 @@ public class DonorController {
 	{
 		logger.debug("Checking user");
 		boolean isNew=donorService.isUserNew(mobileNo);
-		boolean isSendSuccessfull=sMSService.sendOtpSMS(mobileNo);
-		return new ResponseEntity<Boolean>(isNew,HttpStatus.OK);
+		try {
+			boolean isSendSuccessfull=donorOtpService.sendOtp(mobileNo);
+			if(isSendSuccessfull)
+			return new ResponseEntity<Boolean>(isNew,HttpStatus.OK);
+			return new ResponseEntity<Boolean>(isNew,HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Boolean>(isNew,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
+	
 	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")

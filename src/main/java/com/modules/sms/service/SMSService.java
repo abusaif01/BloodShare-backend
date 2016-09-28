@@ -1,8 +1,6 @@
 package com.modules.sms.service;
 
-import com.bloodshare.entity.Otp;
-
 public interface SMSService {
-	public boolean sendOtpSMS(String mobileNo);
-	public boolean authenticateOtp(Otp otp);
+	public boolean sendSMS(String mobileNo,String message);
+
 }

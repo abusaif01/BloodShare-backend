@@ -13,7 +13,23 @@ curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X 
 -------------- Read -----------
 
 curl -v -H "Accept: application/json" http://localhost:8080/hello
-curl -v -H "Accept: application/json" http://localhost:8080/user/b
+curl -v -H "Accept: application/json" http://localhost:8080/help
+curl -v -H "Accept: application/json" http://localhost:8080/user/get/abc
+curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=
+curl -v -H "Accept: application/json" http://localhost:8080/user/authenticate
+{
+	"mobile": ,
+	"key": 
+}
+curl -v -H "Accept: application/json" http://localhost:8080/user/updateInfo
+{
+  "id": "b",
+  "name": "imran",
+  "mobile": "0191501017",
+  "bloodGroup": "o+",
+  "birthDate": 61322400000
+}
+
 curl -v -H "Accept: application/json" http://bloodsharebd.herokuapp.com/user/b
 curl -v -H "Accept: application/json" http://bloodsharebd.herokuapp.com/hello
 

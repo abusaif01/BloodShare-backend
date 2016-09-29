@@ -82,7 +82,7 @@ public class DonorController {
 	{
 		logger.debug("Saving Donor");
 		
-		if(donorService.saveDonor(donor))
+		if(donorService.saveDonor(donor) != null)
 		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
 	}

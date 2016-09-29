@@ -37,10 +37,14 @@ public class DonorOtpDAOImpl implements DonotOtpDAO
 	}
 
 	@Override
-	public boolean save(DonorOtp donorOtp) {
+	public DonorOtp save(DonorOtp donorOtp) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(donorOtp);
-		return true;
+		List donorOtplist=session.createCriteria(DonorOtp.class).add(Restrictions.eq("mobile", donorOtp.getMobile())).list();
+		if (donorOtplist!=null && donorOtplist.size()==1) {
+			return (DonorOtp) donorOtplist.get(0);
+		}
+		return null;
 	}
 
 	@Override

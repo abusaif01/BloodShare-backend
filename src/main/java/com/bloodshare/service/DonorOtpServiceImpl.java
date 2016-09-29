@@ -39,7 +39,8 @@ public class DonorOtpServiceImpl implements DonorOtpService
 	@Override
 	@Transactional
 	public boolean sendOtp(String mobileNo) throws Exception {
-		DonorOtp donorOpt=new DonorOtp(mobileNo, OtpGenerator.getInstance().generateOTP(mobileNo));
+//		DonorOtp donorOpt=new DonorOtp(mobileNo, OtpGenerator.getInstance().generateOTP(mobileNo));
+		DonorOtp donorOpt=new DonorOtp(mobileNo, "1234");
 		otpDAO.save(donorOpt);
 		smsService.sendSMS(mobileNo, donorOpt.getKey());
 		return true;

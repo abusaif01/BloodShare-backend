@@ -29,7 +29,7 @@ public class DonorServiceImpl implements DonorService
 
 	
 	@Transactional
-	public boolean saveDonor(Donor donor) {
+	public Donor saveDonor(Donor donor) {
 		return donorDAO.save(donor);
 	}
 

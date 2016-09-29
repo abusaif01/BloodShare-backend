@@ -76,14 +76,14 @@ public class DonorController {
 		return new ResponseEntity<Donor>(donorService.getDonor(donorId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/create", method = RequestMethod.PUT, 
+	@RequestMapping(value="/user/updateInfo", method = RequestMethod.POST, 
 			consumes="application/json")
 	public ResponseEntity<Boolean>  createDonor(@RequestBody Donor donor)
 	{
 		logger.debug("Saving Donor");
 		
 		if(donorService.saveDonor(donor))
-		return new ResponseEntity<Boolean>(true,HttpStatus.CREATED);
+		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

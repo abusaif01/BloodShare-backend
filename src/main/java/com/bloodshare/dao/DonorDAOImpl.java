@@ -43,12 +43,12 @@ public class DonorDAOImpl implements DonorDAO
 	}
 
 	@Override
-	public boolean save(Donor donor) {
+	public Donor save(Donor donor) {
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(donor);
 		
 		logger.debug("Donor Saved.");
-		return true;
+		return (Donor) session.get(Donor.class, donor.getId());
 	}
 
 	@Override

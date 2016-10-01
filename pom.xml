@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bloodshare</groupId>
   <artifactId>BloodShare-backend</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>BloodShare-backend Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -76,8 +76,11 @@
 						<goal>copy-resources</goal>
 					</goals>
 					<configuration> 
-						<outputDirectory>
+						<!-- <outputDirectory>
 							${project.build.outputDirectory}/static/docs
+						</outputDirectory> -->
+						<outputDirectory>
+							src/main/webapp/static/docs
 						</outputDirectory>
 						<resources>
 							<resource>

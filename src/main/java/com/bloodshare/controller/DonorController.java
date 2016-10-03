@@ -53,10 +53,12 @@ public class DonorController {
 	}
 	
 	@RequestMapping(value="/user/authenticate",consumes="application/json",method=RequestMethod.POST)
-	public ResponseEntity<Boolean> checkMobileNumber(@RequestBody DonorOtp donorOtp)
+	public ResponseEntity<Boolean> authenticateWithOtp(@RequestBody DonorOtp donorOtp)
 	{
+		logger.debug("going to authenticate");
 		try {
 			boolean isAuthenticated=donorOtpService.autheticateOtp(donorOtp);
+			logger.info("result: isAuthenticated = "+isAuthenticated);
 			if(isAuthenticated)
 			return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 			return new ResponseEntity<Boolean>(false,HttpStatus.OK);
@@ -76,14 +78,28 @@ public class DonorController {
 		return new ResponseEntity<Donor>(donorService.getDonor(donorId),HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/user/get/mobile/{mobile}", method = RequestMethod.GET, 
+			consumes="*",produces = "application/json")
+	public ResponseEntity<Donor>  getDonorWithMobile(@PathVariable("mobile") String mobile)
+	{
+		logger.debug("retriving user with MObile NO");
+		Donor donor = donorService.getDonorWithMobileNo(mobile);
+		logger.debug("donor found "+donor);
+		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/user/updateInfo", method = RequestMethod.POST, 
 			consumes="application/json")
-	public ResponseEntity<Boolean>  createDonor(@RequestBody Donor donor)
+	public ResponseEntity<Boolean>  updateDonor(@RequestBody Donor donor)
 	{
 		logger.debug("Saving Donor");
-		
-		if(donorService.saveDonor(donor) != null)
+		if(donorService.saveDonor(donor)==null)
+		{
+			return new ResponseEntity<Boolean>(false,HttpStatus.NOT_FOUND);
+		}
+		else
 		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
-		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+		
+//		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

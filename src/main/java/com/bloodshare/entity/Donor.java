@@ -17,11 +17,12 @@ public class Donor {
 	@Column(name="id")
 	private String id;
 	
+	@Column(name="mobile")
+	private String mobile;
+	
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="mobile")
-	private String mobile;
 	
 	@Column(name="blood_group")
 	private String bloodGroup;

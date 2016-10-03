@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Donor;
+import com.bloodshare.util.DonorUtils;
 
 @Service
 public class DonorServiceImpl implements DonorService
@@ -30,7 +31,14 @@ public class DonorServiceImpl implements DonorService
 	
 	@Transactional
 	public Donor saveDonor(Donor donor) {
-		return donorDAO.save(donor);
+		
+		List<Donor> tempList=donorDAO.readDonorWithMobileNo(donor.getMobile());
+		if(tempList==null || tempList.size()==0)
+			return null;
+		Donor donorOriginal=donorDAO.readDonorWithMobileNo(donor.getMobile()).get(0);
+		DonorUtils.copyAttrib(donor, donorOriginal);
+		
+		return donorDAO.save(donorOriginal);
 	}
 
 	
@@ -42,16 +50,27 @@ public class DonorServiceImpl implements DonorService
 	@Transactional
 	@Override
 	public boolean isUserNew(String mobileNo) {
-		List<Donor> list = donorDAO.readDonorWithMobileNo(mobileNo);
-		if(list.size()==0)
-		return true;
+		if(this.getDonorWithMobileNo(mobileNo)==null )
+		return 	false;
 		
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean loginDonor(String mobileNo) {
 		return false;
+	}
+
+
+	@Transactional
+	@Override
+	public Donor getDonorWithMobileNo(String mobile) {
+		List<Donor> list = donorDAO.readDonorWithMobileNo(mobile);
+		logger.debug(" getDonorWithMobileNo :list size "+list.size());
+		if(list.size()==0)
+			return null;
+		
+		return list.get(0);
 	}
 	
 }

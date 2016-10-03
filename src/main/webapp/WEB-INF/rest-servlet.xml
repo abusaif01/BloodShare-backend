@@ -14,7 +14,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
    </context:component-scan>
    <mvc:annotation-driven enable-matrix-variables="true"/>
    <tx:annotation-driven/>
-   <mvc:resources location="/static/docs/" mapping="/static/docs/**" />
+   <mvc:resources location="/static/docs/" mapping="/docs/api/**" />
    
    
    

@@ -90,15 +90,16 @@ public class DonorController {
 	
 	@RequestMapping(value="/user/updateInfo", method = RequestMethod.POST, 
 			consumes="application/json")
-	public ResponseEntity<Boolean>  updateDonor(@RequestBody Donor donor)
+	public ResponseEntity<Donor>  updateDonor(@RequestBody Donor donor)
 	{
 		logger.debug("Saving Donor");
-		if(donorService.saveDonor(donor)==null)
+		Donor donorUpdated = donorService.saveDonor(donor);
+		if(donorUpdated==null)
 		{
-			return new ResponseEntity<Boolean>(false,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
 		}
 		else
-		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 		
 //		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
 	}

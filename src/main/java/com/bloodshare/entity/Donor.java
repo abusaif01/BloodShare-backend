@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import com.bloodshare.util.DonorStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Donor {
@@ -28,6 +29,7 @@ public class Donor {
 	private String bloodGroup;
 	
 	@Column(name="birthdate")
+	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
 	private Date birthDate;
 
 	@Enumerated(EnumType.ORDINAL)

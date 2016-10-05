@@ -89,14 +89,14 @@ public class ApiDocumentation {
 	@Test
 	public void getUserTest() throws Exception
 	{
-		this.mockMvc.perform(get("/user/get/9bf79ea4-240c-4abc-b1a7-682d799ef64c")) 
+		this.mockMvc.perform(get("/user/get/0f76d919-5d91-4889-856a-3bb7124bc375")) 
 		.andExpect(status().isOk()) 
 		.andDo(document("getDonor"));
 	}
 	@Test
 	public void getUserWithMobileTest() throws Exception
 	{
-		this.mockMvc.perform(get("/user/get/mobile/0191501017")) 
+		this.mockMvc.perform(get("/user/get/mobile/01914820010")) 
 		.andExpect(status().isOk()) 
 		.andDo(document("getDonorMobile"));
 	}
@@ -105,6 +105,7 @@ public class ApiDocumentation {
 	public void updateUserTest() throws Exception
 	{
 		Map<String, String> donorData = new HashMap<String, String>();
+		donorData.put("mobile", "01914820010");
 		donorData.put("name", "Saif");
 		donorData.put("bloodGroup", "1234");
 		donorData.put("birthDate", "10-09-1991");

@@ -1,18 +1,3 @@
-/*
- * Copyright 2014-2015 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.doc;
 import org.junit.Before;
@@ -20,6 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -28,10 +14,18 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,7 +43,7 @@ public class ApiDocumentation {
 //	private TagRepository tagRepository;
 //
 //	@Autowired
-//	private ObjectMapper objectMapper;
+	private ObjectMapper objectMapper=new ObjectMapper() ;
 //
 	@Autowired
 	private WebApplicationContext context;
@@ -70,6 +64,54 @@ public class ApiDocumentation {
 		this.mockMvc.perform(get("/hello")) 
 		.andExpect(status().isOk()) 
 		.andDo(document("hello"));
+	}
+	
+	@Test
+	public void isNewAndSendOtpTest() throws Exception
+	{
+		this.mockMvc.perform(get("/user/check_isnew_send_otp?mobile=01914820010"))
+		.andExpect(status().isOk()) 
+		.andDo(document("inNewNOtp", requestParameters(parameterWithName("mobile").description("Donor Mobile Number")) ));
+	}
+	
+	@Test
+	public void authenticateTest() throws Exception
+	{
+		Map<String, String> otpKey = new HashMap<String, String>();
+		otpKey.put("mobile", "01914820010");
+		otpKey.put("key", "1234");
+		this.mockMvc.perform(post("/user/authenticate").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(otpKey)) ) 
+		.andExpect(status().isOk()) 
+		.andDo(document("authenticate"));
+	}
+	
+	@Test
+	public void getUserTest() throws Exception
+	{
+		this.mockMvc.perform(get("/user/get/9bf79ea4-240c-4abc-b1a7-682d799ef64c")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonor"));
+	}
+	@Test
+	public void getUserWithMobileTest() throws Exception
+	{
+		this.mockMvc.perform(get("/user/get/mobile/0191501017")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonorMobile"));
+	}
+	
+	@Test
+	public void updateUserTest() throws Exception
+	{
+		Map<String, String> donorData = new HashMap<String, String>();
+		donorData.put("name", "Saif");
+		donorData.put("bloodGroup", "1234");
+		donorData.put("birthDate", "10-09-1991");
+		this.mockMvc.perform(post("/user/updateInfo").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(donorData))) 
+		.andExpect(status().isOk()) 
+		.andDo(document("updateUser"));
 	}
 	
 //	@Before

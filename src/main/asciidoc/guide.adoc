@@ -59,7 +59,7 @@ use of HTTP status codes.
 |===
 
 
-[[hello]]
+[[Hello]]
 == Hello
 
 A simple hello world API to test if everything is working ok.
@@ -67,3 +67,86 @@ A simple hello world API to test if everything is working ok.
 ==== Example response
 
 include::{snippets}/hello/http-response.adoc[]
+
+
+[[inNewNOtp]]
+== Is New and Send OTP
+
+check if user is new return true if new or false if old. Send OTP
+
+==== Example request
+
+include::{snippets}/inNewNOtp/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/inNewNOtp/http-response.adoc[]
+
+
+[[authenticate]]
+== Authenticate User
+
+Authenticate With OTP 
+
+==== Example request HTTP
+
+include::{snippets}/authenticate/http-request.adoc[]
+
+==== Example request CURL
+
+include::{snippets}/authenticate/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/authenticate/http-response.adoc[]
+
+
+[[getDonor]]
+== Get Donor
+
+Read User with ID.
+
+==== Example request
+
+include::{snippets}/getDonor/http-request.adoc[]
+
+==== Example response
+
+include::{snippets}/getDonor/http-response.adoc[]
+
+
+[[getDonorMobile]]
+== Read User With Mobile No
+
+Read User With Mobile NO.
+
+==== Example request
+
+include::{snippets}/getDonorMobile/http-request.adoc[]
+
+
+==== Example response
+
+include::{snippets}/getDonorMobile/http-response.adoc[]
+
+
+[[updateUser]]
+== Update Donor
+
+Update Donor data With JSON
+
+==== Example request
+
+include::{snippets}/updateUser/http-request.adoc[]
+
+
+==== Example request CURL
+
+include::{snippets}/updateUser/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/updateUser/http-response.adoc[]
+
+
+

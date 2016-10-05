@@ -51,9 +51,9 @@ public class DonorServiceImpl implements DonorService
 	@Override
 	public boolean isUserNew(String mobileNo) {
 		if(this.getDonorWithMobileNo(mobileNo)==null )
-		return 	false;
+		return 	true;
 		
-		return true;
+		return false;
 	}
 
 	@Override

@@ -15,7 +15,9 @@ curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X 
 curl -v -H "Accept: application/json" http://localhost:8080/hello
 curl -v -H "Accept: application/json" http://localhost:8080/help
 curl -v -H "Accept: application/json" http://localhost:8080/user/get/abc
-curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=
+curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
+curl -v -H "Accept: text/html" http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
+curl -v  http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
 curl -v -H "Accept: application/json" http://localhost:8080/user/authenticate
 {
 	"mobile": ,

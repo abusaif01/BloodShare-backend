@@ -53,18 +53,21 @@ public class DonorController {
 	}
 	
 	@RequestMapping(value="/user/authenticate",consumes="application/json",method=RequestMethod.POST)
-	public ResponseEntity<Boolean> authenticateWithOtp(@RequestBody DonorOtp donorOtp)
+	public ResponseEntity<String> authenticateWithOtp(@RequestBody DonorOtp donorOtp)
 	{
 		logger.debug("going to authenticate");
 		try {
-			boolean isAuthenticated=donorOtpService.autheticateOtp(donorOtp);
-			logger.info("result: isAuthenticated = "+isAuthenticated);
-			if(isAuthenticated)
-			return new ResponseEntity<Boolean>(true,HttpStatus.OK);
-			return new ResponseEntity<Boolean>(false,HttpStatus.OK);
+			Donor donor=donorOtpService.autheticateOtp(donorOtp);
+			logger.info("result: authentication donor = "+donor);
+			if(donor!=null)
+			{
+				
+			}
+			else return new ResponseEntity<String>("Your OTP did not Match",HttpStatus.UNAUTHORIZED);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 	}

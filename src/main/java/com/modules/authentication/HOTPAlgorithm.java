@@ -1,4 +1,4 @@
-package com.modules.otp;
+package com.modules.authentication;
 
 /**
  * OneTimePasswordAlgorithm.java

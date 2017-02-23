@@ -14,6 +14,7 @@ import com.bloodshare.entity.Donor;
 import com.bloodshare.entity.DonorOtp;
 import com.bloodshare.util.DonorStatus;
 import com.bloodshare.util.DonorUtils;
+import com.modules.authentication.CookiesIdGenerator;
 import com.modules.otp.OtpGenerator;
 import com.modules.sms.service.SMSService;
 
@@ -51,7 +52,7 @@ public class DonorOtpServiceImpl implements DonorOtpService
 
 	@Override
 	@Transactional
-	public boolean autheticateOtp(DonorOtp donorOtp) throws Exception {
+	public Donor autheticateOtp(DonorOtp donorOtp) throws Exception {
 		if(otpDAO.isExist(donorOtp))
 		{
 			logger.info("opt data found");
@@ -74,13 +75,15 @@ public class DonorOtpServiceImpl implements DonorOtpService
 				{
 					donor.setStatus(DonorStatus.UTHENTICATED);
 				}
-			}else throw new Exception("Problem in authetication");
+			}else throw new Exception("0/1 user Not Found");
 			
 			donorDAO.save(donor);
-			return true;
+			return donor;
+//			return CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
+//			return true;
 		}
 		logger.info("opt data NOT found");
-		return false;
+		return null;
 	}
 
 }

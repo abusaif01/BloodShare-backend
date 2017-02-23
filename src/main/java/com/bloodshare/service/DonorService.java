@@ -8,6 +8,6 @@ public interface DonorService {
 	public Donor getDonor(String id);
 	public Donor getDonorWithMobileNo(String mobile);
 	public boolean isUserNew(String mobileNo);
-	public boolean loginDonor(String mobileNo);
+	public String startSession(Donor donor);
 	
 }

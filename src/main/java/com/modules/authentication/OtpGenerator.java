@@ -1,4 +1,4 @@
-package com.modules.otp;
+package com.modules.authentication;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;

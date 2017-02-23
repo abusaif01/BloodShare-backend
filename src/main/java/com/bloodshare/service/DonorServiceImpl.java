@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Donor;
 import com.bloodshare.util.DonorUtils;
+import com.modules.authentication.CookiesIdGenerator;
 
 @Service
 public class DonorServiceImpl implements DonorService
@@ -57,8 +58,13 @@ public class DonorServiceImpl implements DonorService
 	}
 
 	@Override
-	public boolean loginDonor(String mobileNo) {
-		return false;
+	public String startSession(Donor donor) {
+		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
+		/*
+		 * Save cookies
+		 */
+		
+		return cookieId;
 	}
 
 

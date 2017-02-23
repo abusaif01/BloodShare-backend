@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +62,8 @@ public class DonorController {
 			logger.info("result: authentication donor = "+donor);
 			if(donor!=null)
 			{
-				
+				String cookiesId=donorService.startSession(donor);
+				return new ResponseEntity<String>(cookiesId,HttpStatus.OK);
 			}
 			else return new ResponseEntity<String>("Your OTP did not Match",HttpStatus.UNAUTHORIZED);
 			
@@ -72,13 +74,24 @@ public class DonorController {
 		}
 	}
 	
+	
+	@RequestMapping(value="/user/get", method = RequestMethod.GET, 
+			consumes="*",produces = "application/json")
+	public ResponseEntity<Donor>  getDonor(@CookieValue("SESSION_ID") String sessionId )
+	{
+		logger.debug("****************************" +sessionId);
+		logger.debug("retriving user with Cookie");
+		
+		return new ResponseEntity<Donor>(donorService.getDonorWithCookie(sessionId),HttpStatus.OK);
+	}
+	
 	@RequestMapping(value="/user/get/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
-	public ResponseEntity<Donor>  getDonor(@PathVariable("id") String donorId)
+	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId)
 	{
 		logger.debug("retriving user with ID");
 		
-		return new ResponseEntity<Donor>(donorService.getDonor(donorId),HttpStatus.OK);
+		return new ResponseEntity<Donor>(donorService.getDonorWithId(donorId),HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/user/get/mobile/{mobile}", method = RequestMethod.GET, 

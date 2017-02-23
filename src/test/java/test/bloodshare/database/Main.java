@@ -4,7 +4,8 @@ package test.bloodshare.database;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-import com.modules.otp.OtpGenerator;
+import com.modules.authentication.OtpGenerator;
+
 
 public class Main {
 

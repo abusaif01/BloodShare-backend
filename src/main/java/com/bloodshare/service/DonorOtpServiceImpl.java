@@ -15,7 +15,6 @@ import com.bloodshare.entity.DonorOtp;
 import com.bloodshare.util.DonorStatus;
 import com.bloodshare.util.DonorUtils;
 import com.modules.authentication.CookiesIdGenerator;
-import com.modules.otp.OtpGenerator;
 import com.modules.sms.service.SMSService;
 
 @Service
@@ -79,8 +78,6 @@ public class DonorOtpServiceImpl implements DonorOtpService
 			
 			donorDAO.save(donor);
 			return donor;
-//			return CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
-//			return true;
 		}
 		logger.info("opt data NOT found");
 		return null;

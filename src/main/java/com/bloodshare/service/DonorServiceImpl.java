@@ -1,5 +1,6 @@
 package com.bloodshare.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bloodshare.dao.CookieDAO;
 import com.bloodshare.dao.DonorDAO;
+import com.bloodshare.entity.Cookie;
 import com.bloodshare.entity.Donor;
 import com.bloodshare.util.DonorUtils;
 import com.modules.authentication.CookiesIdGenerator;
@@ -28,8 +31,15 @@ public class DonorServiceImpl implements DonorService
 	public void setDonorDAO(DonorDAO donorDAO) {
 		this.donorDAO = donorDAO;
 	}
-
 	
+	CookieDAO cookieDAO;
+	
+	@Autowired
+	public void setCookieDAO(CookieDAO cookieDAO) {
+		this.cookieDAO = cookieDAO;
+	}
+
+
 	@Transactional
 	public Donor saveDonor(Donor donor) {
 		
@@ -44,7 +54,8 @@ public class DonorServiceImpl implements DonorService
 
 	
 	@Transactional
-	public Donor getDonor(String id) {
+	@Override
+	public Donor getDonorWithId(String id) {
 		return donorDAO.read(id) ;
 	}
 
@@ -57,16 +68,16 @@ public class DonorServiceImpl implements DonorService
 		return false;
 	}
 
+	@Transactional
 	@Override
 	public String startSession(Donor donor) {
 		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
-		/*
-		 * Save cookies
-		 */
-		
+		Cookie cookie=new Cookie(cookieId, donor, new Date());
+		cookieDAO.save(cookie);
 		return cookieId;
 	}
 
+	
 
 	@Transactional
 	@Override
@@ -77,6 +88,14 @@ public class DonorServiceImpl implements DonorService
 			return null;
 		
 		return list.get(0);
+	}
+
+
+	@Transactional
+	@Override
+	public Donor getDonorWithCookie(String cookieId) {
+		Cookie cookie=cookieDAO.read(cookieId);
+		return cookie.getDonor();
 	}
 	
 }

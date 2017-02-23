@@ -31,6 +31,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 			<list>
 				<value>com.bloodshare.entity.Donor</value>
 				<value>com.bloodshare.entity.DonorOtp</value>
+				<value>com.bloodshare.entity.Cookie</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

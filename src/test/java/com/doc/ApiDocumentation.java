@@ -85,22 +85,22 @@ public class ApiDocumentation {
 		.andExpect(status().isOk()) 
 		.andDo(document("authenticate"));
 	}
-	
-	@Test
-	public void getUserTest() throws Exception
-	{
-		this.mockMvc.perform(get("/user/get/0f76d919-5d91-4889-856a-3bb7124bc375")) 
-		.andExpect(status().isOk()) 
-		.andDo(document("getDonor"));
-	}
-	@Test
-	public void getUserWithMobileTest() throws Exception
-	{
-		this.mockMvc.perform(get("/user/get/mobile/01914820010")) 
-		.andExpect(status().isOk()) 
-		.andDo(document("getDonorMobile"));
-	}
-	
+//	
+//	@Test
+//	public void getUserTest() throws Exception
+//	{
+//		this.mockMvc.perform(get("/user/get/0f76d919-5d91-4889-856a-3bb7124bc375")) 
+//		.andExpect(status().isOk()) 
+//		.andDo(document("getDonor"));
+//	}
+//	@Test
+//	public void getUserWithMobileTest() throws Exception
+//	{
+//		this.mockMvc.perform(get("/user/get/mobile/01914820010")) 
+//		.andExpect(status().isOk()) 
+//		.andDo(document("getDonorMobile"));
+//	}
+//	
 	@Test
 	public void updateUserTest() throws Exception
 	{
@@ -114,6 +114,10 @@ public class ApiDocumentation {
 		.andExpect(status().isOk()) 
 		.andDo(document("updateUser"));
 	}
+	
+	
+	
+	
 	
 //	@Before
 //	public void setUp() {

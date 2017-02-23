@@ -14,15 +14,25 @@ curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X 
 
 curl -v -H "Accept: application/json" http://localhost:8080/hello
 curl -v -H "Accept: application/json" http://localhost:8080/help
+
+--cookie "cookieName=cookieValue"
+
 curl -v -H "Accept: application/json" http://localhost:8080/user/get/abc
+curl -v --cookie "SESSION_ID=5f50ca2f-317d-4b62-9973-a7d30c1e0989" -H "Accept: application/json" http://localhost:8080/user/get
 curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
 curl -v -H "Accept: text/html" http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
+curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=12345
+
 curl -v  http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
-curl -v -H "Accept: application/json" http://localhost:8080/user/authenticate
+curl -v -H "Accept: application/json" http://localhost:8080/user/authenticate 
 {
-	"mobile": ,
-	"key": 
+	"mobile":"12345" ,
+	 "key": "1234"
 }
+
+12345 fcc51950-dcd7-4c53-868c-3ba2dc9a5e68
+01914820010 5f50ca2f-317d-4b62-9973-a7d30c1e0989
+
 curl -v -H "Accept: application/json" http://localhost:8080/user/updateInfo
 {
   "id": "b",

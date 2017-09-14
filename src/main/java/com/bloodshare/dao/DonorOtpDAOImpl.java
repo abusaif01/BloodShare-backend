@@ -51,6 +51,7 @@ public class DonorOtpDAOImpl implements DonotOtpDAO
 	public boolean delete(DonorOtp donorOtp) {
 		Session session = sessionFactory.getCurrentSession();
 		try{
+			donorOtp=(DonorOtp) session.merge(donorOtp);
 			session.delete(donorOtp);
 		}catch(NonUniqueObjectException e)
 		{

@@ -50,9 +50,9 @@ public class HelpController {
 		return  sb.toString();
 	 }
 	 
-	 @RequestMapping("/hello")
+	 @RequestMapping("/")
     public String greeting() {
         logger.debug("Every Thing is working . Ready to GO.");
-		return "Hello From Blood Share ";
+		return "Wellcome to Blood Share ";
     }
 }

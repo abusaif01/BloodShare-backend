@@ -1,1 +1,1 @@
-web: sh target/bin/webapp
+web: java -Dserver.port=$PORT -jar target/BloodShare-backend-Release.01.jar

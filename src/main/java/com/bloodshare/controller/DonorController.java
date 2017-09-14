@@ -75,7 +75,7 @@ public class DonorController {
 	}
 	
 	
-	@RequestMapping(value="/user/get", method = RequestMethod.GET, 
+	@RequestMapping(value="/user", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonor(@CookieValue("SESSION_ID") String sessionId )
 	{
@@ -85,7 +85,7 @@ public class DonorController {
 		return new ResponseEntity<Donor>(donorService.getDonorWithCookie(sessionId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/get/{id}", method = RequestMethod.GET, 
+	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId)
 	{
@@ -94,7 +94,7 @@ public class DonorController {
 		return new ResponseEntity<Donor>(donorService.getDonorWithId(donorId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/get/mobile/{mobile}", method = RequestMethod.GET, 
+	@RequestMapping(value="/user/m/{mobile}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonorWithMobile(@PathVariable("mobile") String mobile)
 	{
@@ -104,7 +104,7 @@ public class DonorController {
 		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/updateInfo", method = RequestMethod.POST, 
+	@RequestMapping(value="/user", method = RequestMethod.POST, 
 			consumes="application/json")
 	public ResponseEntity<Donor>  updateDonor(@RequestBody Donor donor)
 	{

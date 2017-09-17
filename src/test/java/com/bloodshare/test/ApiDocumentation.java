@@ -93,11 +93,26 @@ public class ApiDocumentation {
 		.andDo(document("getDonor"));
 	}
 	@Test
-	public void getUserWithMobileTest() throws Exception
+	public void getUserWithMobileTest1() throws Exception
 	{
-		this.mockMvc.perform(get("/user/m/01914820010")) 
+		this.mockMvc.perform(get("/user/01914820010?type=2")) 
 		.andExpect(status().isOk()) 
-		.andDo(document("getDonorMobile"));
+		.andDo(document("getDonorMobile1"));
+	}
+	
+	@Test
+	public void getUserWithMobileTest2() throws Exception
+	{
+		this.mockMvc.perform(get("/user/01914820010?type=m")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonorMobile2"));
+	}
+	@Test
+	public void getUserWithMobileTest3() throws Exception
+	{
+		this.mockMvc.perform(get("/user/01914820010?type=mobile")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonorMobile3"));
 	}
 	
 	@Test

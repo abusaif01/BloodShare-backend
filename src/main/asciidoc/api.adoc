@@ -122,12 +122,31 @@ Read User With Mobile NO.
 
 ==== Example request
 
-include::{snippets}/getDonorMobile/http-request.adoc[]
+include::{snippets}/getDonorMobile1/http-request.adoc[]
 
 
 ==== Example response
 
-include::{snippets}/getDonorMobile/http-response.adoc[]
+include::{snippets}/getDonorMobile1/http-response.adoc[]
+
+
+==== Example request
+
+include::{snippets}/getDonorMobile2/http-request.adoc[]
+
+
+==== Example response
+
+include::{snippets}/getDonorMobile2/http-response.adoc[]
+
+==== Example request
+
+include::{snippets}/getDonorMobile3/http-request.adoc[]
+
+
+==== Example response
+
+include::{snippets}/getDonorMobile3/http-response.adoc[]
 
 
 [[updateUser]]

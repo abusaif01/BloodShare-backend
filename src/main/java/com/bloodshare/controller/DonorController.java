@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,22 +88,22 @@ public class DonorController {
 	
 	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
-	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId)
+	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId, @RequestParam(required=false,name="type") String idType)
 	{
-		logger.debug("retriving user with ID");
-		
-		return new ResponseEntity<Donor>(donorService.getDonorWithId(donorId),HttpStatus.OK);
-	}
-	
-	@RequestMapping(value="/user/m/{mobile}", method = RequestMethod.GET, 
-			consumes="*",produces = "application/json")
-	public ResponseEntity<Donor>  getDonorWithMobile(@PathVariable("mobile") String mobile)
-	{
-		logger.debug("retriving user with MObile NO");
-		Donor donor = donorService.getDonorWithMobileNo(mobile);
-		logger.debug("donor found "+donor);
+		Donor donor=null;
+		if(idType!=null && ( idType.equalsIgnoreCase("2") || idType.equalsIgnoreCase("m") || idType.equalsIgnoreCase("mobile")))
+		{
+			logger.debug("retriving user with MObile NO");
+			donor = donorService.getDonorWithMobileNo(donorId);
+			logger.debug("donor found "+donor);
+		}
+		else {
+			donor=donorService.getDonorWithId(donorId);
+			logger.debug("retriving user with ID");
+		}
 		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
 	}
+	
 	
 	@RequestMapping(value="/user", method = RequestMethod.POST, 
 			consumes="application/json")

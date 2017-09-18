@@ -21,6 +21,7 @@ import com.bloodshare.service.DonorService;
 
 
 @RestController
+@RequestMapping("/user")
 public class DonorController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DonorController.class);
@@ -37,7 +38,7 @@ public class DonorController {
 		this.donorOtpService = donorOtpService;
 	}
 
-	@RequestMapping(value="/user/check_isnew_send_otp",method= RequestMethod.GET)
+	@RequestMapping(value="/check_isnew_send_otp",method= RequestMethod.GET)
 	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
 	{
 		logger.debug("Checking user if new");
@@ -54,7 +55,7 @@ public class DonorController {
 		
 	}
 	
-	@RequestMapping(value="/user/authenticate",consumes="application/json",method=RequestMethod.POST)
+	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
 	public ResponseEntity<String> authenticateWithOtp(@RequestBody DonorOtp donorOtp)
 	{
 		logger.debug("going to authenticate");
@@ -76,7 +77,7 @@ public class DonorController {
 	}
 	
 	
-	@RequestMapping(value="/user", method = RequestMethod.GET, 
+	@RequestMapping(value="/", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonor(@CookieValue("SESSION_ID") String sessionId )
 	{
@@ -86,7 +87,7 @@ public class DonorController {
 		return new ResponseEntity<Donor>(donorService.getDonorWithCookie(sessionId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/user/{id}", method = RequestMethod.GET, 
+	@RequestMapping(value="/{id}", method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId, @RequestParam(required=false,name="type") String idType)
 	{
@@ -105,7 +106,7 @@ public class DonorController {
 	}
 	
 	
-	@RequestMapping(value="/user", method = RequestMethod.POST, 
+	@RequestMapping(value="/", method = RequestMethod.POST, 
 			consumes="application/json")
 	public ResponseEntity<Donor>  updateDonor(@RequestBody Donor donor)
 	{

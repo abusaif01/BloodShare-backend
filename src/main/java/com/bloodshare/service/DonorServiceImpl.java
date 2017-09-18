@@ -42,8 +42,8 @@ public class DonorServiceImpl implements DonorService
 
 	@Transactional
 	public Donor saveDonor(Donor donor) {
-		
 		List<Donor> tempList=donorDAO.readDonorWithMobileNo(donor.getMobile());
+		logger.info("save donor:  list size "+tempList.size());
 		if(tempList==null || tempList.size()==0)
 			return null;
 		Donor donorOriginal=donorDAO.readDonorWithMobileNo(donor.getMobile()).get(0);

@@ -10,20 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity(name="blood_seek_event")
 public class BloodSeekEvent {
 
 	@Id
 	@GeneratedValue
-	private String  id;
+	private int  id;
+	
+	@Column(name="boold_group")
+	private String booldGroup;
 	
 	@Column(name="quantity")
 	private int qunatity;
 	
 	@Column(name="target_date")
+	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
 	private Date neededDate;
 	
 	@Column(name="crated")
+	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
 	private Date createdDate; 
 	
 	@Column(name="location")
@@ -42,12 +49,20 @@ public class BloodSeekEvent {
 	@JoinColumn(name="user_Id")
 	private Donor userInNeed;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getBooldGroup() {
+		return booldGroup;
+	}
+
+	public void setBooldGroup(String booldGroup) {
+		this.booldGroup = booldGroup;
 	}
 
 	public int getQunatity() {

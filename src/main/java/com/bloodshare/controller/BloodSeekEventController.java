@@ -28,12 +28,12 @@ public class BloodSeekEventController {
 
 
 
-	@RequestMapping(value="/",method= RequestMethod.POST)
+	@RequestMapping(method= RequestMethod.POST)
 	public ResponseEntity<BloodSeekEvent> createEvent(@RequestBody BloodSeekEvent event)
 	{
 		logger.debug("create event request found");
 		event=eventService.createNewEvent(event);
-		logger.debug("event created : "+event.);
+		logger.debug("event created : "+event.getId());
 		return new ResponseEntity<BloodSeekEvent>(event,HttpStatus.CREATED);
 	}
 }

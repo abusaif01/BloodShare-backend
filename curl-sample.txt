@@ -8,9 +8,7 @@ curl  http://localhost:8080/help
   "birthDate": 61322400000
 }
 
-curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X PUT --data  "{\"id\":\"b\",\"name\":\"imran\",\"mobile\":\"0191501017\",\"bloodGroup\":\"o+\",\"birthDate\":61322400000}" http://localhost:8080/user/create
-
--------------- Read -----------
+-------------- User -----------
 
 curl -v -H "Accept: application/json" http://localhost:8080/hello
 curl -v -H "Accept: application/json" http://localhost:8080/help
@@ -46,13 +44,10 @@ curl -v -H "Accept: application/json" http://localhost:8080/user/
 
 curl -v -H "Accept: application/json" http://bloodsharebd.herokuapp.com/user/b
 
--------------- Update -----------
+-------------- EVENT -----------
 
-curl  -v -H "Accept: text/plain" -H "Content-Type: text/plain" -X POST --data "id:1 body:Hello Rest API from Plain text - this is Updated author:saif title:Hello Plain" http://localhost:8080/update
-
-
-curl -i -v -H "Accept: application/json" -H "Content-Type: application/json" -X POST --data  "{\"id\":\"2\",\"title\":\"Hello Rest\",\"body\":\"Hello Rest API - Json - This is Updated\",\"author\":\"saif\"}" http://localhost:8080/update
-
--------------- feed -----------
-
-curl -i -v http://localhost:8080/feed
+curl -v -X POST http://localhost:8080/bloodSeekEvent/
+{
+	"quantity" :"2",
+	"location" :  "test"
+}

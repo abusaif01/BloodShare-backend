@@ -31,7 +31,7 @@ public class BloodSeekEventDAOImpl implements BloodSeekEventDAO
 	@Override
 	public BloodSeekEvent save(BloodSeekEvent t) {
 		Session session = sessionFactory.getCurrentSession();
-		String id=(String) session.save(t);
+		int id=(int) session.save(t);
 		return session.get(BloodSeekEvent.class, id);
 	}
 

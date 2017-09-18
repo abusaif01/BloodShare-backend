@@ -168,4 +168,20 @@ include::{snippets}/updateUser/curl-request.adoc[]
 include::{snippets}/updateUser/http-response.adoc[]
 
 
+[[createEvent]]
+== Create Event
 
+Create  Event  With JSON
+
+==== Example request
+
+include::{snippets}/createEvent/http-request.adoc[]
+
+
+==== Example request CURL
+
+include::{snippets}/createEvent/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/createEvent/http-response.adoc[]

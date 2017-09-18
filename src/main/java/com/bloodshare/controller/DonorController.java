@@ -77,7 +77,7 @@ public class DonorController {
 	}
 	
 	
-	@RequestMapping(value="/", method = RequestMethod.GET, 
+	@RequestMapping(method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonor(@CookieValue("SESSION_ID") String sessionId )
 	{
@@ -106,11 +106,11 @@ public class DonorController {
 	}
 	
 	
-	@RequestMapping(value="/", method = RequestMethod.POST, 
+	@RequestMapping(method = RequestMethod.POST, 
 			consumes="application/json")
 	public ResponseEntity<Donor>  updateDonor(@RequestBody Donor donor)
 	{
-		logger.debug("Saving Donor");
+		logger.debug("Saving Donor :"+donor);
 		Donor donorUpdated = donorService.saveDonor(donor);
 		if(donorUpdated==null)
 		{

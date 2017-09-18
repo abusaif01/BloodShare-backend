@@ -2,6 +2,7 @@ package com.bloodshare.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bloodshare.dao.BloodSeekEventDAO;
 import com.bloodshare.entity.BloodSeekEvent;
@@ -19,6 +20,7 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 
 
 	@Override
+	@Transactional
 	public BloodSeekEvent createNewEvent(BloodSeekEvent event) {
 		return eventDao.save(event);
 	}

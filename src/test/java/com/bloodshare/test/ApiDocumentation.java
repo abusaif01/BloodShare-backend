@@ -121,7 +121,7 @@ public class ApiDocumentation {
 		Map<String, String> donorData = new HashMap<String, String>();
 		donorData.put("mobile", "01914820010");
 		donorData.put("name", "Saif");
-		donorData.put("bloodGroup", "1234");
+		donorData.put("bloodGroup", "O+ve");
 		donorData.put("birthDate", "10-09-1991");
 		this.mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON)
 				.content(this.objectMapper.writeValueAsString(donorData))) 
@@ -129,6 +129,20 @@ public class ApiDocumentation {
 		.andDo(document("updateUser"));
 	}
 	
+	@Test
+	public void crateEventTest() throws Exception
+	{
+		Map<String, String> eventData = new HashMap<String, String>();
+		eventData.put("quantity", "5");
+		eventData.put("location", "dhaka");
+		eventData.put("bloodGroup", "O+ve");
+		eventData.put("birthDate", "19-09-2017");
+		
+		this.mockMvc.perform(post("/bloodSeekEvent").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(eventData))) 
+		.andExpect(status().isCreated()) 
+		.andDo(document("createEvent"));
+	}
 	
 	
 	

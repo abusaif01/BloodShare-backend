@@ -18,7 +18,7 @@ curl -v -H "Accept: application/json" http://localhost:8080/help
 --cookie "cookieName=cookieValue"
 
 curl -v -H "Accept: application/json" http://localhost:8080/user/get/abc
-curl -v --cookie "SESSION_ID=5f50ca2f-317d-4b62-9973-a7d30c1e0989" -H "Accept: application/json" http://localhost:8080/user/get
+curl -v --cookie "SESSION_ID=4a7d8f96-01ba-4be9-91c3-32979f06925a" -H "Accept: application/json" http://localhost:8080/user/
 curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
 curl -v -H "Accept: text/html" http://localhost:8080/user/check_isnew_send_otp?mobile=0191501017
 curl -v -H "Accept: application/json" http://localhost:8080/user/check_isnew_send_otp?mobile=12345
@@ -31,11 +31,11 @@ curl -v -H "Accept: application/json" http://localhost:8080/user/authenticate
 }
 
 12345 fcc51950-dcd7-4c53-868c-3ba2dc9a5e68
-01914820010 5f50ca2f-317d-4b62-9973-a7d30c1e0989
+01914820010 4a7d8f96-01ba-4be9-91c3-32979f06925a
 
 curl -v  -X OPTION http://bloodsharebd.herokuapp.com/user/
 
-curl -v -H "Accept: application/json" http://localhost:8080/user/updateInfo
+curl -v -H "Accept: application/json" http://localhost:8080/user/
 {
   "id": "b",
   "name": "imran",

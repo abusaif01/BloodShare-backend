@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.adrjun.authentication.CookiesIdGenerator;
 import com.bloodshare.dao.CookieDAO;
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Cookie;
 import com.bloodshare.entity.Donor;
 import com.bloodshare.util.DonorUtils;
-import com.modules.authentication.CookiesIdGenerator;
+
 
 @Service
 public class DonorServiceImpl implements DonorService

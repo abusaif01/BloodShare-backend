@@ -1,10 +1,10 @@
-package test.bloodshare.database;
+package com.bloodshare.database;
 
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-import com.modules.authentication.OtpGenerator;
+import com.adrjun.authentication.OtpGenerator;
 
 
 public class Main {

@@ -14,8 +14,8 @@ import com.bloodshare.entity.Donor;
 import com.bloodshare.entity.DonorOtp;
 import com.bloodshare.util.DonorStatus;
 import com.bloodshare.util.DonorUtils;
-import com.modules.authentication.CookiesIdGenerator;
-import com.modules.sms.service.SMSService;
+import com.adrjun.authentication.CookiesIdGenerator;
+import com.adrjun.sms.service.SMSService;
 
 @Service
 public class DonorOtpServiceImpl implements DonorOtpService

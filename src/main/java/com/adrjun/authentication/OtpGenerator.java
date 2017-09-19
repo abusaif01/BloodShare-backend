@@ -1,4 +1,4 @@
-package com.modules.authentication;
+package com.adrjun.authentication;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;

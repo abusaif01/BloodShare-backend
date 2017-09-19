@@ -5,6 +5,7 @@ public class LocationBasedSearch {
 
 	private float covertKMintoGeoDistance(int km)
 	{
+		return km;
 		
 	}
 }

@@ -1,4 +1,4 @@
-package com.modules.authentication;
+package com.adrjun.authentication;
 
 /**
  * OneTimePasswordAlgorithm.java

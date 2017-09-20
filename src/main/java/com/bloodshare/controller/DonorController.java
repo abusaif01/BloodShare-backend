@@ -56,24 +56,15 @@ public class DonorController {
 	}
 	
 	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
-	public ResponseEntity<String> authenticateWithOtp(@RequestBody DonorOtp donorOtp)
+	public ResponseEntity<String> authenticateWithOtp(@RequestParam String token)
 	{
 		logger.debug("going to authenticate");
-		try {
-			Donor donor=donorOtpService.autheticateOtp(donorOtp);
-			logger.info("result: authentication donor = "+donor);
-			if(donor!=null)
-			{
-				String cookiesId=donorService.startSession(donor);
-				return new ResponseEntity<String>(cookiesId,HttpStatus.OK);
-			}
-			else return new ResponseEntity<String>("Your OTP did not Match",HttpStatus.UNAUTHORIZED);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-			
-		}
+		String uid=donorService.authenticateToken(token);
+		logger.info("donor uid = "+uid);
+		if(uid==null)
+			return new ResponseEntity<String>("Token Not Authenticated",HttpStatus.UNAUTHORIZED);
+		int userType = donorService.isUserNew(token)? 1:2;
+		return new ResponseEntity<String>(""+userType,HttpStatus.OK);
 	}
 	
 	
@@ -108,17 +99,15 @@ public class DonorController {
 	
 	@RequestMapping(method = RequestMethod.POST, 
 			consumes="application/json")
-	public ResponseEntity<Donor>  updateDonor(@RequestBody Donor donor)
+	public ResponseEntity<Donor>  updateDonor(@CookieValue("SESSION_ID") String sessionId,@RequestBody Donor donor)
 	{
 		logger.debug("Saving Donor :"+donor);
-		Donor donorUpdated = donorService.saveDonor(donor);
-		if(donorUpdated==null)
-		{
+		Donor originalDonor=donorService.getDonorWithCookie(sessionId);
+		if(originalDonor==null)
 			return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
-		}
-		else
-		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 		
-//		return new ResponseEntity<Boolean>(false,HttpStatus.INTERNAL_SERVER_ERROR);
+		donor.setId(originalDonor.getId());
+		Donor donorUpdated = donorService.saveDonor(donor);
+		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 	}
 }

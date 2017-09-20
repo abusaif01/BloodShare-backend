@@ -10,10 +10,12 @@ import javax.persistence.Id;
 
 import com.bloodshare.util.DonorStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Donor {
 	
+	@JsonIgnore
 	@Id
 	@Column(name="id")
 	private String id;

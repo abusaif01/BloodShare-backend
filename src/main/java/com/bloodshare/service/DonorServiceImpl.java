@@ -2,6 +2,7 @@ package com.bloodshare.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,15 @@ public class DonorServiceImpl implements DonorService
 		this.cookieDAO = cookieDAO;
 	}
 
+	@Override
+	public String authenticateToken(String token) {
+		try {
+			return this.fireBase.getUid(token);
+		} catch (ExecutionException | InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Transactional
 	public Donor saveDonor(Donor donor) {
@@ -69,11 +79,12 @@ public class DonorServiceImpl implements DonorService
 
 	@Transactional
 	@Override
-	public boolean isUserNew(String mobileNo) {
-		if(this.getDonorWithMobileNo(mobileNo)==null )
-		return 	true;
-		
-		return false;
+	public boolean isUserNew(String fireBaseUid) {
+//		if(this.getDonorWithMobileNo(mobileNo)==null )
+//		return 	true;
+//		
+//		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Transactional
@@ -105,5 +116,4 @@ public class DonorServiceImpl implements DonorService
 		Cookie cookie=cookieDAO.read(cookieId);
 		return cookie.getDonor();
 	}
-	
 }

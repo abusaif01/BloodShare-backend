@@ -63,7 +63,6 @@ public class DonorController {
 		logger.info("donor uid = "+fireUid);
 		if(fireUid==null)
 			return new ResponseEntity<String>("Token Not Authenticated",HttpStatus.UNAUTHORIZED);
-//		Donor donor = donorService.getDonorWithFireUid(fireUid);
 		boolean isUserNew=donorService.startSession(token,fireUid);
 	
 		int userType=isUserNew?1:2;

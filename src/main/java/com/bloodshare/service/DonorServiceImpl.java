@@ -77,9 +77,9 @@ public class DonorServiceImpl implements DonorService
 		return donorDAO.read(id) ;
 	}
 
+//	@Override
 	@Transactional
-	@Override
-	public boolean isUserNew(String fireBaseUid) {
+	private Donor getDonorWithFireUid(String fireBaseUid) {
 //		if(this.getDonorWithMobileNo(mobileNo)==null )
 //		return 	true;
 //		
@@ -89,11 +89,27 @@ public class DonorServiceImpl implements DonorService
 
 	@Transactional
 	@Override
-	public String startSession(Donor donor) {
-		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
-		Cookie cookie=new Cookie(cookieId, donor, new Date());
-		cookieDAO.save(cookie);
-		return cookieId;
+	public boolean startSession(String token,String fireUid) {
+		boolean donorTypeNew;
+		
+		Donor donor=this.getDonorWithFireUid(fireUid);
+		String uid;
+		if(donor==null)
+		{
+			donorTypeNew=true;
+			uid=DonorUtils.generateId();
+		}
+		else
+		{
+			donorTypeNew=false;
+			uid=donor.getId();
+		}
+		
+		throw new UnsupportedOperationException();
+//		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
+//		Cookie cookie=new Cookie(cookieId, donor, new Date());
+//		cookieDAO.save(cookie);
+//		return cookieId;
 	}
 
 	

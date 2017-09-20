@@ -59,11 +59,15 @@ public class DonorController {
 	public ResponseEntity<String> authenticateWithOtp(@RequestParam String token)
 	{
 		logger.debug("going to authenticate");
-		String uid=donorService.authenticateToken(token);
-		logger.info("donor uid = "+uid);
-		if(uid==null)
+		String fireUid=donorService.authenticateToken(token);
+		logger.info("donor uid = "+fireUid);
+		if(fireUid==null)
 			return new ResponseEntity<String>("Token Not Authenticated",HttpStatus.UNAUTHORIZED);
-		int userType = donorService.isUserNew(token)? 1:2;
+//		Donor donor = donorService.getDonorWithFireUid(fireUid);
+		boolean isUserNew=donorService.startSession(token,fireUid);
+	
+		int userType=isUserNew?1:2;
+		
 		return new ResponseEntity<String>(""+userType,HttpStatus.OK);
 	}
 	

@@ -9,7 +9,7 @@ public interface DonorService {
 	public Donor getDonorWithCookie(String cookieId);
 	public Donor getDonorWithId(String id);
 	public Donor getDonorWithMobileNo(String mobile);
-	public boolean isUserNew(String fireBaseUid);
-	public String startSession(Donor donor);
+//	public Donor getDonorWithFireUid(String fireBaseUid);
+	public boolean startSession(String token,String fireUid);
 	
 }

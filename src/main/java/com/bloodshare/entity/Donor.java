@@ -19,6 +19,11 @@ public class Donor {
 	@Id
 	@Column(name="id")
 	private String id;
+
+	@JsonIgnore
+	@Column(name="fire_id",unique=true)
+	private String fireId;
+	
 	
 	@Column(name="mobile")
 	private String mobile;
@@ -88,9 +93,18 @@ public class Donor {
 		this.status = status;
 	}
 
+	
+	public String getFireId() {
+		return fireId;
+	}
+
+	public void setFireId(String fireId) {
+		this.fireId = fireId;
+	}
+
 	@Override
 	public String toString() {
-		return "Donor [id=" + id + ", name=" + name + ", mobile=" + mobile + ", bloodGroup=" + bloodGroup
-				+ ", birthDate=" + birthDate + ", status=" + status + "]";
+		return "Donor [id=" + id + ", fireId=" + fireId + ", mobile=" + mobile + ", name=" + name + ", bloodGroup="
+				+ bloodGroup + ", birthDate=" + birthDate + ", status=" + status + "]";
 	}
 }

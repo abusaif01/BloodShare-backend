@@ -12,12 +12,14 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseCredentials;
 import com.google.firebase.auth.FirebaseToken;
+import com.google.firebase.auth.UserRecord;
 import com.google.firebase.tasks.OnFailureListener;
 import com.google.firebase.tasks.OnSuccessListener;
 import com.google.firebase.tasks.Task;
 import com.google.firebase.tasks.Tasks;
 
-public class FireBaseAdmin {
+public class FireBaseAdmin implements OnFailureListener
+{
 
 	private static final Logger logger = LoggerFactory.getLogger(FireBaseAdmin.class);
 	static
@@ -77,5 +79,25 @@ public class FireBaseAdmin {
 		logger.debug("Returning  "+authenticationTask.getResult().getUid());
 		
 		return authenticationTask.getResult().getUid();
+	}
+	
+	public String getUserPhoneNumber(String uid) throws ExecutionException, InterruptedException
+	{
+		Task<UserRecord> task = FirebaseAuth.getInstance().getUser(uid)
+				.addOnSuccessListener(new OnSuccessListener<UserRecord>() {
+
+					@Override
+					public void onSuccess(UserRecord userRecord) {
+						logger.debug("User record retrived : "+userRecord);
+					}
+				})
+			    .addOnFailureListener(this);
+		Tasks.await(task);
+		return task.getResult().getPhoneNumber();
+	}
+
+	@Override
+	public void onFailure(Exception excpetion) {
+		excpetion.printStackTrace();
 	}
 }

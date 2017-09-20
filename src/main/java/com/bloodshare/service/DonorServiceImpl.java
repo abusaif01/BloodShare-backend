@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.adrjun.authentication.CookiesIdGenerator;
 import com.adrjun.firebase.FireBaseAdmin;
 import com.bloodshare.dao.CookieDAO;
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Cookie;
 import com.bloodshare.entity.Donor;
+import com.bloodshare.util.DonorStatus;
 import com.bloodshare.util.DonorUtils;
 
 
@@ -90,26 +90,31 @@ public class DonorServiceImpl implements DonorService
 	@Transactional
 	@Override
 	public boolean startSession(String token,String fireUid) {
-		boolean donorTypeNew;
+		boolean isDonorNew=false;
 		
 		Donor donor=this.getDonorWithFireUid(fireUid);
 		String uid;
 		if(donor==null)
 		{
-			donorTypeNew=true;
-			uid=DonorUtils.generateId();
+			logger.debug("Donor is new");
+			donor=new Donor();
+			donor.setId(DonorUtils.generateId() );
+			donor.setFireId(fireUid);
+			try {
+				donor.setMobile(this.fireBase.getUserPhoneNumber(fireUid));
+			} catch (ExecutionException | InterruptedException e) {
+				e.printStackTrace();
+				logger.error("Could not retrive user Data from Firebase");
+			}
+			
+			donor.setStatus(DonorStatus.UTHENTICATED);
+			isDonorNew=true;
+			donorDAO.save(donor);
 		}
-		else
-		{
-			donorTypeNew=false;
-			uid=donor.getId();
-		}
+		logger.debug("Donor : "+donor);
+		cookieDAO.save(new Cookie(token, donor, new Date()));
 		
-		throw new UnsupportedOperationException();
-//		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
-//		Cookie cookie=new Cookie(cookieId, donor, new Date());
-//		cookieDAO.save(cookie);
-//		return cookieId;
+		return isDonorNew;
 	}
 
 	

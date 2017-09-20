@@ -38,22 +38,22 @@ public class DonorController {
 		this.donorOtpService = donorOtpService;
 	}
 
-	@RequestMapping(value="/check_isnew_send_otp",method= RequestMethod.GET)
-	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
-	{
-		logger.debug("Checking user if new");
-		boolean isNew=donorService.isUserNew(mobileNo);
-		try {
-			boolean isSendSuccessfull=donorOtpService.sendOtp(mobileNo);
-			if(isSendSuccessfull)
-			return new ResponseEntity<Boolean>(isNew,HttpStatus.OK);
-			return new ResponseEntity<Boolean>(isNew,HttpStatus.INTERNAL_SERVER_ERROR);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Boolean>(isNew,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-	}
+//	@RequestMapping(value="/check_isnew_send_otp",method= RequestMethod.GET)
+//	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
+//	{
+//		logger.debug("Checking user if new");
+//		boolean isNew=donorService.isUserNew(mobileNo);
+//		try {
+//			boolean isSendSuccessfull=donorOtpService.sendOtp(mobileNo);
+//			if(isSendSuccessfull)
+//			return new ResponseEntity<Boolean>(isNew,HttpStatus.OK);
+//			return new ResponseEntity<Boolean>(isNew,HttpStatus.INTERNAL_SERVER_ERROR);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return new ResponseEntity<Boolean>(isNew,HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//		
+//	}
 	
 	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
 	public ResponseEntity<String> authenticateWithOtp(@RequestParam String token)

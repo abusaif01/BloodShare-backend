@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.adrjun.authentication.CookiesIdGenerator;
+import com.adrjun.firebase.FireBaseAdmin;
 import com.bloodshare.dao.CookieDAO;
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Cookie;
@@ -27,13 +28,19 @@ public class DonorServiceImpl implements DonorService
 	}
 	
 	DonorDAO donorDAO;
+	CookieDAO cookieDAO;
+	FireBaseAdmin fireBase;
 	
 	@Autowired
 	public void setDonorDAO(DonorDAO donorDAO) {
 		this.donorDAO = donorDAO;
 	}
 	
-	CookieDAO cookieDAO;
+	@Autowired
+	public void setFireBase(FireBaseAdmin fireBase)
+	{
+		this.fireBase=fireBase;
+	}
 	
 	@Autowired
 	public void setCookieDAO(CookieDAO cookieDAO) {

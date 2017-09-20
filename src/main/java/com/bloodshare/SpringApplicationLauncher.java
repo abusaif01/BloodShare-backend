@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
+import com.adrjun.firebase.FireBaseAdmin;
+
 @SpringBootApplication
 @ComponentScan("com")
 public class SpringApplicationLauncher {
@@ -21,5 +23,11 @@ public class SpringApplicationLauncher {
 		HibernateJpaSessionFactoryBean fact = new HibernateJpaSessionFactoryBean();
 		fact.setEntityManagerFactory(emf);
 		return fact;
+	}
+	
+	@Bean
+	public FireBaseAdmin fireBase()
+	{
+		return new FireBaseAdmin();
 	}
 }

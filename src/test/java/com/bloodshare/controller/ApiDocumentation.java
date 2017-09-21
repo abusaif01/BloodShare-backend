@@ -100,15 +100,15 @@ public class ApiDocumentation {
 //		.andDo(document("inNewNOtp", requestParameters(parameterWithName("mobile").description("Donor Mobile Number")) ));
 //	}
 	
-	@Test
-	public void authenticateTest() throws Exception
-	{
-		String token="1234";
-		this.mockMvc.perform(post("/user/authenticate").contentType(MediaType.APPLICATION_JSON)
-				.content(token) ) 
-		.andExpect(status().isUnauthorized()) 
-		.andDo(document("authenticate"));
-	}
+//	@Test
+//	public void authenticateTest() throws Exception
+//	{
+//		String token="1234";
+//		this.mockMvc.perform(post("/user/authenticate").contentType(MediaType.APPLICATION_JSON)
+//				.content(token) ) 
+//		.andExpect(status().isUnauthorized()) 
+//		.andDo(document("authenticate"));
+//	}
 	
 	@Test
 	public void getUserTest() throws Exception
@@ -117,58 +117,58 @@ public class ApiDocumentation {
 		.andExpect(status().isOk()) 
 		.andDo(document("getDonor"));
 	}
-//	
-//	@Test
-//	public void getUserWithMobileTest1() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/01914820010?type=2")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonorMobile1"));
-//	}
-//	
-//	@Test
-//	public void getUserWithMobileTest2() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/01914820010?type=m")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonorMobile2"));
-//	}
-//	@Test
-//	public void getUserWithMobileTest3() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/01914820010?type=mobile")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonorMobile3"));
-//	}
-//	
-//	@Test
-//	public void updateUserTest() throws Exception
-//	{
-//		Map<String, String> donorData = new HashMap<String, String>();
-//		donorData.put("mobile", "01914820010");
-//		donorData.put("name", "Saif");
-//		donorData.put("bloodGroup", "O+ve");
-//		donorData.put("birthDate", "10-09-1991");
-//		this.mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON)
-//				.content(this.objectMapper.writeValueAsString(donorData))) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("updateUser"));
-//	}
-//	
-//	@Test
-//	public void crateEventTest() throws Exception
-//	{
-//		Map<String, String> eventData = new HashMap<String, String>();
-//		eventData.put("quantity", "5");
-//		eventData.put("location", "dhaka");
-//		eventData.put("bloodGroup", "O+ve");
-//		eventData.put("birthDate", "19-09-2017");
-//		
-//		this.mockMvc.perform(post("/bloodSeekEvent").contentType(MediaType.APPLICATION_JSON)
-//				.content(this.objectMapper.writeValueAsString(eventData))) 
-//		.andExpect(status().isCreated()) 
-//		.andDo(document("createEvent"));
-//	}
+	
+	@Test
+	public void getUserWithMobileTest1() throws Exception
+	{
+		this.mockMvc.perform(get("/user/01914820010?type=2")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonorMobile1"));
+	}
+	
+	@Test
+	public void getUserWithMobileTest2() throws Exception
+	{
+		this.mockMvc.perform(get("/user/01914820010?type=m")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonorMobile2"));
+	}
+	@Test
+	public void getUserWithMobileTest3() throws Exception
+	{
+		this.mockMvc.perform(get("/user/01914820010?type=mobile")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonorMobile3"));
+	}
+	
+	@Test
+	public void updateUserTest() throws Exception
+	{
+		Map<String, String> donorData = new HashMap<String, String>();
+		donorData.put("mobile", "01914820010");
+		donorData.put("name", "Saif");
+		donorData.put("bloodGroup", "O+ve");
+		donorData.put("birthDate", "10-09-1991");
+		this.mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(donorData))) 
+		.andExpect(status().isOk()) 
+		.andDo(document("updateUser"));
+	}
+	
+	@Test
+	public void crateEventTest() throws Exception
+	{
+		Map<String, String> eventData = new HashMap<String, String>();
+		eventData.put("quantity", "5");
+		eventData.put("location", "dhaka");
+		eventData.put("bloodGroup", "O+ve");
+		eventData.put("birthDate", "19-09-2017");
+		
+		this.mockMvc.perform(post("/bloodSeekEvent").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(eventData))) 
+		.andExpect(status().isCreated()) 
+		.andDo(document("createEvent"));
+	}
 	
 	
 	

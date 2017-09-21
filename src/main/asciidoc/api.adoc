@@ -64,7 +64,7 @@ use of HTTP status codes.
 
 A simple hello world API to test if everything is working ok.
 
-==== Example response
+=== Example response
 
 include::{snippets}/hello/http-response.adoc[]
 
@@ -74,15 +74,15 @@ include::{snippets}/hello/http-response.adoc[]
 
 Authenticate With OTP 
 
-==== Example request HTTP
+=== Example request HTTP
 
 include::{snippets}/authenticate/http-request.adoc[]
 
-==== Example request CURL
+=== Example request CURL
 
 include::{snippets}/authenticate/curl-request.adoc[]
 
-==== Example response
+=== Example response
 
 include::{snippets}/authenticate/http-response.adoc[]
 
@@ -92,11 +92,11 @@ include::{snippets}/authenticate/http-response.adoc[]
 
 Read User with ID.
 
-==== Example request
+=== Example request
 
 include::{snippets}/getDonor/http-request.adoc[]
 
-==== Example response
+=== Example response
 
 include::{snippets}/getDonor/http-response.adoc[]
 
@@ -106,31 +106,31 @@ include::{snippets}/getDonor/http-response.adoc[]
 
 Read User With Mobile NO.
 
-==== Example request
+=== Example request
 
 include::{snippets}/getDonorMobile1/http-request.adoc[]
 
 
-==== Example response
+=== Example response
 
 include::{snippets}/getDonorMobile1/http-response.adoc[]
 
 
-==== Example request
+=== Example request
 
 include::{snippets}/getDonorMobile2/http-request.adoc[]
 
 
-==== Example response
+=== Example response
 
 include::{snippets}/getDonorMobile2/http-response.adoc[]
 
-==== Example request
+=== Example request
 
 include::{snippets}/getDonorMobile3/http-request.adoc[]
 
 
-==== Example response
+=== Example response
 
 include::{snippets}/getDonorMobile3/http-response.adoc[]
 
@@ -140,16 +140,16 @@ include::{snippets}/getDonorMobile3/http-response.adoc[]
 
 Update Donor data With JSON
 
-==== Example request
+=== Example request
 
 include::{snippets}/updateUser/http-request.adoc[]
 
 
-==== Example request CURL
+=== Example request CURL
 
 include::{snippets}/updateUser/curl-request.adoc[]
 
-==== Example response
+=== Example response
 
 include::{snippets}/updateUser/http-response.adoc[]
 
@@ -159,15 +159,15 @@ include::{snippets}/updateUser/http-response.adoc[]
 
 Create  Event  With JSON
 
-==== Example request
+=== Example request
 
 include::{snippets}/createEvent/http-request.adoc[]
 
 
-==== Example request CURL
+=== Example request CURL
 
 include::{snippets}/createEvent/curl-request.adoc[]
 
-==== Example response
+=== Example response
 
 include::{snippets}/createEvent/http-response.adoc[]

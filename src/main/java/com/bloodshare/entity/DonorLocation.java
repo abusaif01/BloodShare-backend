@@ -12,6 +12,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class DonorLocation {
 	
@@ -21,6 +23,7 @@ public class DonorLocation {
 	@GenericGenerator(name="SharedPrimaryKeyGenerator",strategy="foreign",parameters =  @Parameter(name="property",value="donor"))
 	private String id;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private Donor donor;

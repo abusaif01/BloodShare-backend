@@ -80,11 +80,10 @@ public class DonorServiceImpl implements DonorService
 //	@Override
 	@Transactional
 	private Donor getDonorWithFireUid(String fireBaseUid) {
-//		if(this.getDonorWithMobileNo(mobileNo)==null )
-//		return 	true;
-//		
-//		return false;
-		throw new UnsupportedOperationException();
+		List<Donor> tempList=donorDAO.readDonorWithFireID(fireBaseUid);
+		if(tempList==null|| tempList.size()==0)
+			return null;
+		return tempList.get(0);
 	}
 
 	@Transactional

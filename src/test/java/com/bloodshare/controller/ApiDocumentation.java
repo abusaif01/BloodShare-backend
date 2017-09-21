@@ -1,5 +1,5 @@
 
-package com.bloodshare.test;
+package com.bloodshare.controller;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,8 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.HashMap;
@@ -65,23 +63,21 @@ public class ApiDocumentation {
 		.andDo(document("hello"));
 	}
 	
-	@Test
-	public void isNewAndSendOtpTest() throws Exception
-	{
-		this.mockMvc.perform(get("/user/check_isnew_send_otp?mobile=01914820010"))
-		.andExpect(status().isOk()) 
-		.andDo(document("inNewNOtp", requestParameters(parameterWithName("mobile").description("Donor Mobile Number")) ));
-	}
+//	@Test
+//	public void isNewAndSendOtpTest() throws Exception
+//	{
+//		this.mockMvc.perform(get("/user/check_isnew_send_otp?mobile=01914820010"))
+//		.andExpect(status().isOk()) 
+//		.andDo(document("inNewNOtp", requestParameters(parameterWithName("mobile").description("Donor Mobile Number")) ));
+//	}
 	
 	@Test
 	public void authenticateTest() throws Exception
 	{
-		Map<String, String> otpKey = new HashMap<String, String>();
-		otpKey.put("mobile", "01914820010");
-		otpKey.put("key", "1234");
+		String token="1234";
 		this.mockMvc.perform(post("/user/authenticate").contentType(MediaType.APPLICATION_JSON)
-				.content(this.objectMapper.writeValueAsString(otpKey)) ) 
-		.andExpect(status().isOk()) 
+				.content(token) ) 
+		.andExpect(status().isUnauthorized()) 
 		.andDo(document("authenticate"));
 	}
 	
@@ -143,6 +139,20 @@ public class ApiDocumentation {
 		.andExpect(status().isCreated()) 
 		.andDo(document("createEvent"));
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

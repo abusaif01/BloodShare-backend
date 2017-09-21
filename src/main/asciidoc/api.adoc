@@ -69,20 +69,6 @@ A simple hello world API to test if everything is working ok.
 include::{snippets}/hello/http-response.adoc[]
 
 
-[[inNewNOtp]]
-== Is New and Send OTP
-
-check if user is new return true if new or false if old. Send OTP
-
-==== Example request
-
-include::{snippets}/inNewNOtp/http-request.adoc[]
-
-==== Example response
-
-include::{snippets}/inNewNOtp/http-response.adoc[]
-
-
 [[authenticate]]
 == Authenticate User
 

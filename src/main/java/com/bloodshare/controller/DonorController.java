@@ -56,9 +56,9 @@ public class DonorController {
 //	}
 	
 	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
-	public ResponseEntity<String> authenticateWithOtp(@RequestParam String token)
+	public ResponseEntity<String> authenticate(@RequestBody String token)
 	{
-		logger.debug("going to authenticate");
+		logger.debug("going to authenticate, token "+token);
 		String fireUid=donorService.authenticateToken(token);
 		logger.info("donor uid = "+fireUid);
 		if(fireUid==null)
@@ -102,14 +102,14 @@ public class DonorController {
 	
 	@RequestMapping(method = RequestMethod.POST, 
 			consumes="application/json")
-	public ResponseEntity<Donor>  updateDonor(@CookieValue("SESSION_ID") String sessionId,@RequestBody Donor donor)
+	public ResponseEntity<Donor>  updateDonor(/*@CookieValue("SESSION_ID") String sessionId,*/@RequestBody Donor donor)
 	{
 		logger.debug("Saving Donor :"+donor);
-		Donor originalDonor=donorService.getDonorWithCookie(sessionId);
-		if(originalDonor==null)
-			return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
-		
-		donor.setId(originalDonor.getId());
+//		Donor originalDonor=donorService.getDonorWithCookie(sessionId);
+//		if(originalDonor==null)
+//			return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
+//		
+//		donor.setId(originalDonor.getId());
 		Donor donorUpdated = donorService.saveDonor(donor);
 		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 	}

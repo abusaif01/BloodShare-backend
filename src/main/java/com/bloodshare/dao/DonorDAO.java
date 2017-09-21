@@ -9,4 +9,5 @@ import com.bloodshare.entity.Donor;
 public interface DonorDAO extends GenericDAO<Donor>
 {
 	public List<Donor> readDonorWithMobileNo(String mobileNo); 
+	public List<Donor> readDonorWithFireID(String fireId); 
 }

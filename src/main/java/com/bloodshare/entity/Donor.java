@@ -2,11 +2,14 @@ package com.bloodshare.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.bloodshare.util.DonorStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -41,6 +44,9 @@ public class Donor {
 
 	@Enumerated(EnumType.ORDINAL)
 	private DonorStatus status;
+	
+	@OneToOne(mappedBy="donor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	private DonorLocation location;
 	
 	
 	public String getId() {
@@ -100,6 +106,14 @@ public class Donor {
 
 	public void setFireId(String fireId) {
 		this.fireId = fireId;
+	}
+
+	public DonorLocation getLocation() {
+		return location;
+	}
+
+	public void setLocation(DonorLocation location) {
+		this.location = location;
 	}
 
 	@Override

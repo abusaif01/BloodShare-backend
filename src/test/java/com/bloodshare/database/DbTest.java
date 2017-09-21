@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import com.adrjun.authentication.OtpGenerator;
 
 
-public class Main {
+public class DbTest {
 
 	public static void main(String[] args) throws InvalidKeyException, NoSuchAlgorithmException {
 //		DonorDAO donorDAO=new DonorDAOImpl();

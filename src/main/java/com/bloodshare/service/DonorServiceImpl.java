@@ -59,7 +59,8 @@ public class DonorServiceImpl implements DonorService
 	}
 
 	@Transactional
-	public Donor saveDonor(Donor donor) {
+	@Override
+	public Donor updateDonor(Donor donor) {
 		List<Donor> tempList=donorDAO.readDonorWithMobileNo(donor.getMobile());
 		logger.info("save donor:  list size "+tempList.size());
 		if(tempList==null || tempList.size()==0)
@@ -70,6 +71,10 @@ public class DonorServiceImpl implements DonorService
 		return donorDAO.save(donorOriginal);
 	}
 
+	@Transactional
+	public Donor createDonor(Donor donor) {
+		return donorDAO.save(donor);
+	}
 	
 	@Transactional
 	@Override

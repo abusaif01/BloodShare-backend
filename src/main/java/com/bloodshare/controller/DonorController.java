@@ -78,7 +78,10 @@ public class DonorController {
 		logger.debug("****************************" +sessionId);
 		logger.debug("retriving user with Cookie");
 		
-		return new ResponseEntity<Donor>(donorService.getDonorWithCookie(sessionId),HttpStatus.OK);
+		Donor donor=donorService.getDonorWithCookie(sessionId);
+		if(donor==null)
+			return new ResponseEntity<Donor>(donor,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET, 
@@ -96,6 +99,8 @@ public class DonorController {
 			donor=donorService.getDonorWithId(donorId);
 			logger.debug("retriving user with ID");
 		}
+		if(donor==null)
+			return new ResponseEntity<Donor>(donor,HttpStatus.NOT_FOUND);
 		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
 	}
 	
@@ -110,7 +115,7 @@ public class DonorController {
 //			return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
 //		
 //		donor.setId(originalDonor.getId());
-		Donor donorUpdated = donorService.saveDonor(donor);
+		Donor donorUpdated = donorService.updateDonor(donor);
 		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 	}
 }

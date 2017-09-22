@@ -92,10 +92,14 @@ public class GeoLocation {
 		return radLon;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "(" + degLat + "\u00B0, " + degLon + "\u00B0) = (" +
+//				 radLat + " rad, " + radLon + " rad)";
+//	}
 	@Override
 	public String toString() {
-		return "(" + degLat + "\u00B0, " + degLon + "\u00B0) = (" +
-				 radLat + " rad, " + radLon + " rad)";
+		return "(" + degLat +", " + degLon + ")";
 	}
 
 	/**
@@ -121,10 +125,10 @@ public class GeoLocation {
 	 * <p>For more information about the formulae used in this method visit
 	 * <a href="http://JanMatuschek.de/LatitudeLongitudeBoundingCoordinates">
 	 * http://JanMatuschek.de/LatitudeLongitudeBoundingCoordinates</a>.</p>
-	 * @param distance the distance from the point represented by this
+	 * @param distanceInKiloMeter the distance from the point represented by this
 	 * GeoLocation instance. Must me measured in the same unit as the radius
 	 * argument.
-	 * @param radius the radius of the sphere, e.g. the average radius for a
+	 * @param earthRadius the radius of the sphere, e.g. the average radius for a
 	 * spherical approximation of the figure of the Earth is approximately
 	 * 6371.01 kilometers.
 	 * @return an array of two GeoLocation objects such that:<ul>
@@ -145,13 +149,13 @@ public class GeoLocation {
 	 * array element.</li>
 	 * </ul>
 	 */
-	public GeoLocation[] boundingCoordinates(double distance, double radius) {
+	public GeoLocation[] boundingCoordinates(double distanceInKiloMeter, double earthRadius) {
 
-		if (radius < 0d || distance < 0d)
+		if (earthRadius < 0d || distanceInKiloMeter < 0d)
 			throw new IllegalArgumentException();
 
 		// angular distance in radians on a great circle
-		double radDist = distance / radius;
+		double radDist = distanceInKiloMeter / earthRadius;
 
 		double minLat = radLat - radDist;
 		double maxLat = radLat + radDist;

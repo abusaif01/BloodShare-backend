@@ -23,6 +23,7 @@ public class LocationBasedSearch {
 		
 		GeoLocation loc=GeoLocation.fromDegrees(lat, log);
 		GeoLocation[] boundingCordinates = loc.boundingCoordinates(distanceInKm, EARTH_RADUIUS);
+		
 		double [] points=new double[4];
 		points[0]=boundingCordinates[0].getLatitudeInDegrees();
 		points[1]=boundingCordinates[0].getLongitudeInDegrees();

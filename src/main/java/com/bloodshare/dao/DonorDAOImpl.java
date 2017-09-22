@@ -69,7 +69,7 @@ public class DonorDAOImpl implements DonorDAO
 	public List<Donor> readDonorWithFireID(String fireId) {
 		Session session=sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Donor.class);
-		cr.add(Restrictions.eq("fire_id", fireId));
+		cr.add(Restrictions.eq("fireId", fireId));
 		List<Donor> list = cr.list();
 		return list;
 	}

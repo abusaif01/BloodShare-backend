@@ -101,22 +101,22 @@ public class DonorServiceImpl implements DonorService
 		if(donor==null)
 		{
 			logger.debug("Donor is new");
-			donor=new Donor();
-			donor.setId(DonorUtils.generateId() );
-			donor.setFireId(fireUid);
-			try {
-				donor.setMobile(this.fireBase.getUserPhoneNumber(fireUid));
-			} catch (ExecutionException | InterruptedException e) {
-				e.printStackTrace();
-				logger.error("Could not retrive user Data from Firebase");
-			}
-			
-			donor.setStatus(DonorStatus.UTHENTICATED);
+//			donor=new Donor();
+//			donor.setId(DonorUtils.generateId() );
+//			donor.setFireId(fireUid);
+//			try {
+//				donor.setMobile(this.fireBase.getUserPhoneNumber(fireUid));
+//			} catch (ExecutionException | InterruptedException e) {
+//				e.printStackTrace();
+//				logger.error("Could not retrive user Data from Firebase");
+//			}
+//			
+//			donor.setStatus(DonorStatus.UTHENTICATED);
 			isDonorNew=true;
-			donorDAO.save(donor);
+//			donorDAO.save(donor);
 		}
 		logger.debug("Donor : "+donor);
-		cookieDAO.save(new Cookie(token, donor, new Date()));
+//		cookieDAO.save(new Cookie(token, donor, new Date()));
 		
 		return isDonorNew;
 	}

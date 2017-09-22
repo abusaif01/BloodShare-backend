@@ -75,7 +75,7 @@ public class ApiDocumentation {
 			donor.setLocation(loc );
 			
 			donor.setBloodGroup("o+e");
-			donor.setMobile("0191482001");
+			donor.setMobile("01914820010");
 			donor.setName("Saif");
 			donor.setStatus(DonorStatus.ACTIVE);
 			donor.setFireId("fire1234");
@@ -180,18 +180,11 @@ public class ApiDocumentation {
 	
 	
 	
+
 	
 	
 	
 	
-	
-	
-	
-//	@Before
-//	public void setUp() {
-//		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-//				.apply(documentationConfiguration(this.restDocumentation)).build();
-//	}
 //
 //	@Test
 //	public void errorExample() throws Exception {

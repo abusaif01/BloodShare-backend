@@ -1,5 +1,8 @@
 package com.bloodshare.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +30,14 @@ public class DonorController {
 	private static final Logger logger = LoggerFactory.getLogger(DonorController.class);
 	
 	private DonorService donorService;
-	private DonorOtpService donorOtpService;
-	
 	@Autowired
 	public void setDonorService(DonorService donorService) {
 		this.donorService = donorService;
 	}
-	@Autowired
-	public void setDonorOtpService(DonorOtpService donorOtpService) {
-		this.donorOtpService = donorOtpService;
-	}
+//	@Autowired
+//	public void setDonorOtpService(DonorOtpService donorOtpService) {
+//		this.donorOtpService = donorOtpService;
+//	}
 
 //	@RequestMapping(value="/check_isnew_send_otp",method= RequestMethod.GET)
 //	public ResponseEntity<Boolean> checkMobileNumber(@RequestParam(value="mobile") String mobileNo )
@@ -56,18 +57,30 @@ public class DonorController {
 //	}
 	
 	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
-	public ResponseEntity<String> authenticate(@RequestBody String token)
+	public ResponseEntity<Map<String,String>> authenticate(@RequestBody String token)
 	{
+		Map<String,String> responseMap=new HashMap<String,String>();
 		logger.debug("going to authenticate, token "+token);
 		String fireUid=donorService.authenticateToken(token);
 		logger.info("donor uid = "+fireUid);
 		if(fireUid==null)
-			return new ResponseEntity<String>("Token Not Authenticated",HttpStatus.UNAUTHORIZED);
+		{
+			responseMap.put("response", "Authentication Failed");
+			responseMap.put("result", "failed");
+			responseMap.put("isSuccess", "false");
+			responseMap.put("isAuthenticated", "false");
+			
+			return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.UNAUTHORIZED);
+		}
 		boolean isUserNew=donorService.startSession(token,fireUid);
 	
 		int userType=isUserNew?1:2;
 		
-		return new ResponseEntity<String>(""+userType,HttpStatus.OK);
+		responseMap.put("userType", String.valueOf(userType));
+		responseMap.put("isUserNew", String.valueOf(isUserNew));
+		responseMap.put("isNew", String.valueOf(isUserNew));
+		
+		return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.OK);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.bloodshare.controller;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -7,6 +8,8 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,9 +53,9 @@ public class HelpController {
 		return  sb.toString();
 	 }
 	 
-	 @RequestMapping("/")
-    public String greeting() {
+	 @RequestMapping(value="/",produces="application/json")
+    public ResponseEntity<Map<String,String>> greeting() {
         logger.debug("Every Thing is working . Ready to GO.");
-		return "Wellcome to Blood Share ";
+		return  new ResponseEntity<Map<String,String>>(Collections.singletonMap("hello", "Wellcome to Blood Share") ,HttpStatus.OK);
     }
 }

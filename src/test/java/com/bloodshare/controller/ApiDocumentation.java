@@ -55,35 +55,35 @@ public class ApiDocumentation {
 	private MockMvc mockMvc;
 	private String donorId="4a7d8f96-01ba-4be9-91c3-32979f06925a";
 	
-//	@Before
-//	public void setUp(){
-//		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-//				.apply(documentationConfiguration(this.restDocumentation)) 
-//				.build();
-//		
-//		Donor donor=donorService.getDonorWithId(donorId);
-//		System.out.println(donor);
-//		if(donor==null)
-//		{
-//			donor=new Donor();
-//			donor.setId(donorId);
-//			donor.setBirthDate(new Date());
-//			DonorLocation loc=new DonorLocation();
-//			loc.setLatitute(0.999999);
-//			loc.setLatitute(0.11111);
-//			loc.setDonor(donor);
-//			donor.setLocation(loc );
-//			
-//			donor.setBloodGroup("o+e");
-//			donor.setMobile("01914820010");
-//			donor.setName("Saif");
-//			donor.setStatus(DonorStatus.ACTIVE);
-//			donor.setFireId("fire1234");
-//			
-//			((DonorServiceImpl)donorService).createDonor(donor);
-//		}
-//	}
-//	
+	@Before
+	public void setUp(){
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+				.apply(documentationConfiguration(this.restDocumentation)) 
+				.build();
+		
+		Donor donor=donorService.getDonorWithId(donorId);
+		System.out.println(donor);
+		if(donor==null)
+		{
+			donor=new Donor();
+			donor.setId(donorId);
+			donor.setBirthDate(new Date());
+			DonorLocation loc=new DonorLocation();
+			loc.setLatitute(0.999999);
+			loc.setLatitute(0.11111);
+			loc.setDonor(donor);
+			donor.setLocation(loc );
+			
+			donor.setBloodGroup("o+e");
+			donor.setMobile("01914820010");
+			donor.setName("Saif");
+			donor.setStatus(DonorStatus.ACTIVE);
+			donor.setFireId("fire1234");
+			
+			((DonorServiceImpl)donorService).createDonor(donor);
+		}
+	}
+	
 	@Test
 	public void helloTest() throws Exception
 	{

@@ -56,7 +56,7 @@ public class DonorController {
 //		
 //	}
 	
-	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
+	@RequestMapping(value="/authenticate",consumes="application/json",produces="application/json", method=RequestMethod.POST)
 	public ResponseEntity<Map<String,String>> authenticate(@RequestBody Map<String,String> requestData)
 	{
 		logger.debug("requested Data "+requestData);
@@ -73,21 +73,24 @@ public class DonorController {
 			responseMap.put("result", "failed");
 			responseMap.put("isSuccess", "false");
 			responseMap.put("isAuthenticated", "false");
-			
+			logger.debug("\n\nReturnigng FROM HERE ");
 			return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.UNAUTHORIZED);
 		}
+		logger.debug("\nGoing to call start session");
 		boolean isUserNew=donorService.startSession(token,fireUid);
-	
+		logger.debug("isUserNew "+isUserNew);
 		int userType=isUserNew?1:2;
 		
 		responseMap.put("token", "12345");
 		responseMap.put("accessToken", "12345");
+		responseMap.put("user_access_token", "12345");
 		responseMap.put("id", "12345");
 		responseMap.put("autharization", "12345");
 		responseMap.put("userType", String.valueOf(userType));
 		responseMap.put("isUserNew", String.valueOf(isUserNew));
 		responseMap.put("isNew", String.valueOf(isUserNew));
 		
+		logger.debug("responseMap "+responseMap);
 		return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.OK);
 	}
 	

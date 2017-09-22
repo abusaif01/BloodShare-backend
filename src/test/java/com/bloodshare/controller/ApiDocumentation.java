@@ -84,13 +84,13 @@ public class ApiDocumentation {
 //		}
 //	}
 //	
-//	@Test
-//	public void helloTest() throws Exception
-//	{
-//		this.mockMvc.perform(get("/")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("hello"));
-//	}
+	@Test
+	public void helloTest() throws Exception
+	{
+		this.mockMvc.perform(get("/")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("hello"));
+	}
 //	
 ////	@Test
 ////	public void isNewAndSendOtpTest() throws Exception

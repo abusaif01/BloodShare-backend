@@ -57,9 +57,13 @@ public class DonorController {
 //	}
 	
 	@RequestMapping(value="/authenticate",consumes="application/json",method=RequestMethod.POST)
-	public ResponseEntity<Map<String,String>> authenticate(@RequestBody String token)
+	public ResponseEntity<Map<String,String>> authenticate(@RequestBody Map<String,String> requestData)
 	{
+		logger.debug("requested Data "+requestData);
+		
 		Map<String,String> responseMap=new HashMap<String,String>();
+		String token=requestData.get("firebase_token");
+		
 		logger.debug("going to authenticate, token "+token);
 		String fireUid=donorService.authenticateToken(token);
 		logger.info("donor uid = "+fireUid);
@@ -76,6 +80,10 @@ public class DonorController {
 	
 		int userType=isUserNew?1:2;
 		
+		responseMap.put("token", "12345");
+		responseMap.put("accessToken", "12345");
+		responseMap.put("id", "12345");
+		responseMap.put("autharization", "12345");
 		responseMap.put("userType", String.valueOf(userType));
 		responseMap.put("isUserNew", String.valueOf(isUserNew));
 		responseMap.put("isNew", String.valueOf(isUserNew));

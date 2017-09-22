@@ -93,6 +93,7 @@ public class FireBaseAdmin implements OnFailureListener
 				})
 			    .addOnFailureListener(this);
 		Tasks.await(task);
+		logger.debug("user phone number "+task.getResult().getPhoneNumber());
 		return task.getResult().getPhoneNumber();
 	}
 

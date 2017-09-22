@@ -79,16 +79,9 @@ public class DonorController {
 		logger.debug("\nGoing to call start session");
 		boolean isUserNew=donorService.startSession(token,fireUid);
 		logger.debug("isUserNew "+isUserNew);
-		int userType=isUserNew?1:2;
 		
-		responseMap.put("token", "12345");
-		responseMap.put("accessToken", "12345");
 		responseMap.put("user_access_token", "12345");
-		responseMap.put("id", "12345");
-		responseMap.put("autharization", "12345");
-		responseMap.put("userType", String.valueOf(userType));
-		responseMap.put("isUserNew", String.valueOf(isUserNew));
-		responseMap.put("isNew", String.valueOf(isUserNew));
+		responseMap.put("is_user_new", String.valueOf(isUserNew));
 		
 		logger.debug("responseMap "+responseMap);
 		return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.OK);
@@ -97,12 +90,12 @@ public class DonorController {
 	
 	@RequestMapping(method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
-	public ResponseEntity<Donor>  getDonor(@CookieValue("SESSION_ID") String sessionId )
+	public ResponseEntity<Donor>  getDonor( )
 	{
-		logger.debug("****************************" +sessionId);
+		logger.debug("****************************");
 		logger.debug("retriving user with Cookie");
 		
-		Donor donor=donorService.getDonorWithCookie(sessionId);
+		Donor donor=donorService.getDonorWithMobileNo("+8801920500174");
 		if(donor==null)
 			return new ResponseEntity<Donor>(donor,HttpStatus.NOT_FOUND);
 		return new ResponseEntity<Donor>(donor,HttpStatus.OK);

@@ -41,7 +41,8 @@ public class TokenFilter implements Filter
 		final HttpServletRequest request = (HttpServletRequest) req;
 		final HttpServletResponse response =(HttpServletResponse) res;
 		logger.debug("URI "+request.getRequestURI());
-		if(request.getRequestURI().contains( "/authenticate") || request.getRequestURI().equals("/"))
+		if(request.getRequestURI().contains( "/authenticate") || request.getRequestURI().equals("/") 
+				|| request.getRequestURI().contains("docs/api.html") )
 		{
 			logger.debug("skipping /authenticate");
 			chain.doFilter(req, res);

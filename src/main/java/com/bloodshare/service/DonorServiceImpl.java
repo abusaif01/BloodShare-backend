@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.adrjun.authentication.CookiesIdGenerator;
 import com.adrjun.firebase.FireBaseAdmin;
 import com.bloodshare.dao.CookieDAO;
 import com.bloodshare.dao.DonorDAO;
@@ -82,9 +83,9 @@ public class DonorServiceImpl implements DonorService
 		return donorDAO.read(id) ;
 	}
 
-//	@Override
+	@Override
 	@Transactional
-	private Donor getDonorWithFireUid(String fireBaseUid) {
+	public Donor getDonorWithFireUid(String fireBaseUid) {
 		List<Donor> tempList=donorDAO.readDonorWithFireID(fireBaseUid);
 		if(tempList==null|| tempList.size()==0)
 			return null;
@@ -93,35 +94,30 @@ public class DonorServiceImpl implements DonorService
 
 	@Transactional
 	@Override
-	public boolean startSession(String token,String fireUid) {
-		boolean isDonorNew=false;
+	public String startSession(String fireUid,Donor donor) {
 		
-		Donor donor=this.getDonorWithFireUid(fireUid);
-		String uid;
 		if(donor==null)
 		{
 			logger.debug("Donor is new");
-//			donor=new Donor();
-//			donor.setId(DonorUtils.generateId() );
-//			donor.setFireId(fireUid);
-//			try {
-//				donor.setMobile(this.fireBase.getUserPhoneNumber(fireUid));
-//			} catch (ExecutionException | InterruptedException e) {
-//				e.printStackTrace();
-//				logger.error("Could not retrive user Data from Firebase");
-//			}
-//			
-//			donor.setStatus(DonorStatus.UTHENTICATED);
-			isDonorNew=true;
-//			donorDAO.save(donor);
+			donor=new Donor();
+			donor.setId(DonorUtils.generateId() );
+			donor.setFireId(fireUid);
+			try {
+				donor.setMobile(this.fireBase.getUserPhoneNumber(fireUid));
+			} catch (ExecutionException | InterruptedException e) {
+				e.printStackTrace();
+				logger.error("Could not retrive user Data from Firebase");
+			}
+			
+			donor.setStatus(DonorStatus.UTHENTICATED);
+			donorDAO.save(donor);
 		}
 		logger.debug("Donor : "+donor);
-//		cookieDAO.save(new Cookie(token, donor, new Date()));
-		
-		return isDonorNew;
+		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
+		cookieDAO.save(new Cookie(cookieId, donor, new Date()));
+		return cookieId;
 	}
 
-	
 
 	@Transactional
 	@Override

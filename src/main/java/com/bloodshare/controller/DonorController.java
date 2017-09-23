@@ -62,10 +62,10 @@ public class DonorController {
 		logger.debug("requested Data "+requestData);
 		
 		Map<String,String> responseMap=new HashMap<String,String>();
-		String token=requestData.get("firebase_token");
+		String fireToken=requestData.get("firebase_token");
 		
-		logger.debug("going to authenticate, token "+token);
-		String fireUid=donorService.authenticateToken(token);
+		logger.debug("going to authenticate, token "+fireToken);
+		String fireUid=donorService.authenticateToken(fireToken);
 		logger.info("donor uid = "+fireUid);
 		if(fireUid==null)
 		{
@@ -76,14 +76,19 @@ public class DonorController {
 			logger.debug("\n\nReturnigng FROM HERE ");
 			return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.UNAUTHORIZED);
 		}
-		logger.debug("\nGoing to call start session");
-		boolean isUserNew=donorService.startSession(token,fireUid);
-		logger.debug("isUserNew "+isUserNew);
+		Donor donor=donorService.getDonorWithFireUid(fireUid);
 		
-		responseMap.put("user_access_token", "12345");
+		boolean isUserNew= donor==null?true:false;
+		logger.debug("isUserNew "+isUserNew);
+		logger.debug("\nGoing to call start session");
+		String accessToken=donorService.startSession(fireUid,donor);
+		logger.debug("accessToken "+accessToken);
+
+		responseMap.put("user_access_token", accessToken);
 		responseMap.put("is_user_new", String.valueOf(isUserNew));
 		
 		logger.debug("responseMap "+responseMap);
+
 		return new ResponseEntity<Map<String,String>>(responseMap,HttpStatus.OK);
 	}
 	

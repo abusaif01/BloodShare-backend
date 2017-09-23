@@ -97,7 +97,7 @@ include::{snippets}/authenticate/http-response.adoc[]
 [[getDonor]]
 === Get Donor
 
-Read User with ID.
+Read User .
 
 ==== Example request
 
@@ -106,40 +106,6 @@ include::{snippets}/getDonor/http-request.adoc[]
 ==== Example response
 
 include::{snippets}/getDonor/http-response.adoc[]
-
-
-[[getDonorMobile]]
-=== Read User With Mobile No
-
-Read User With Mobile NO.
-
-==== Example request
-
-include::{snippets}/getDonorMobile1/http-request.adoc[]
-
-
-==== Example response
-
-include::{snippets}/getDonorMobile1/http-response.adoc[]
-
-
-==== Example request
-
-include::{snippets}/getDonorMobile2/http-request.adoc[]
-
-
-==== Example response
-
-include::{snippets}/getDonorMobile2/http-response.adoc[]
-
-==== Example request
-
-include::{snippets}/getDonorMobile3/http-request.adoc[]
-
-
-==== Example response
-
-include::{snippets}/getDonorMobile3/http-response.adoc[]
 
 
 [[updateUser]]

@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.bloodshare.util.DonorStatus;
@@ -45,80 +46,130 @@ public class Donor {
 	@Enumerated(EnumType.ORDINAL)
 	private DonorStatus status;
 	
-	@OneToOne(mappedBy="donor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="location_id")
 	private DonorLocation location;
 	
 	
+	
+
 	public String getId() {
 		return id;
 	}
+
+
+
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
-	public String getMobile() {
-		return mobile;
-	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getBloodGroup() {
-		return bloodGroup;
-	}
-
-	public void setBloodGroup(String bloodGroup) {
-		this.bloodGroup = bloodGroup;
-	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-	
-	
-
-	public DonorStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(DonorStatus status) {
-		this.status = status;
-	}
-
-	
 	public String getFireId() {
 		return fireId;
 	}
+
+
+
 
 	public void setFireId(String fireId) {
 		this.fireId = fireId;
 	}
 
+
+
+
+	public String getMobile() {
+		return mobile;
+	}
+
+
+
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+
+	public String getBloodGroup() {
+		return bloodGroup;
+	}
+
+
+
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+
+
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+
+
+	public DonorStatus getStatus() {
+		return status;
+	}
+
+
+
+
+	public void setStatus(DonorStatus status) {
+		this.status = status;
+	}
+
+
+
+
 	public DonorLocation getLocation() {
 		return location;
 	}
+
+
+
 
 	public void setLocation(DonorLocation location) {
 		this.location = location;
 	}
 
+
+
+
 	@Override
 	public String toString() {
 		return "Donor [id=" + id + ", fireId=" + fireId + ", mobile=" + mobile + ", name=" + name + ", bloodGroup="
-				+ bloodGroup + ", birthDate=" + birthDate + ", status=" + status + "]";
+				+ bloodGroup + ", birthDate=" + birthDate + ", status=" + status + ", location=" + location + "]";
 	}
+
+	
 }

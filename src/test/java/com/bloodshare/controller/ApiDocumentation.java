@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Donor;
 import com.bloodshare.entity.DonorLocation;
+import com.bloodshare.filter.TokenFilter;
 import com.bloodshare.service.DonorService;
 import com.bloodshare.service.DonorServiceImpl;
 import com.bloodshare.util.DonorStatus;
@@ -26,6 +27,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +44,7 @@ public class ApiDocumentation {
 
 	@Autowired
 	private DonorService donorService;
+	
 //
 //	@Autowired
 //	private TagRepository tagRepository;
@@ -53,11 +56,13 @@ public class ApiDocumentation {
 	private WebApplicationContext context;
 //
 	private MockMvc mockMvc;
-	private String donorId="4a7d8f96-01ba-4be9-91c3-32979f06925a";
-	
+	private String donorId="1234";
+	@Autowired
+    private TokenFilter tokeFilter;
 	@Before
 	public void setUp(){
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+				 .addFilter(tokeFilter, "/*")
 				.apply(documentationConfiguration(this.restDocumentation)) 
 				.build();
 		
@@ -81,6 +86,7 @@ public class ApiDocumentation {
 			donor.setFireId("fire1234");
 			
 			((DonorServiceImpl)donorService).createDonor(donor);
+			donorService.startSession("fire1234", donor);
 		}
 	}
 	
@@ -91,70 +97,46 @@ public class ApiDocumentation {
 		.andExpect(status().isOk()) 
 		.andDo(document("hello"));
 	}
-//	
-////	@Test
-////	public void isNewAndSendOtpTest() throws Exception
-////	{
-////		this.mockMvc.perform(get("/user/check_isnew_send_otp?mobile=01914820010"))
-////		.andExpect(status().isOk()) 
-////		.andDo(document("inNewNOtp", requestParameters(parameterWithName("mobile").description("Donor Mobile Number")) ));
-////	}
-//	
-////	@Test
-////	public void authenticateTest() throws Exception
-////	{
-////		String token="1234";
-////		this.mockMvc.perform(post("/user/authenticate").contentType(MediaType.APPLICATION_JSON)
-////				.content(token) ) 
-////		.andExpect(status().isUnauthorized()) 
-////		.andDo(document("authenticate"));
-////	}
-//	
-//	@Test
-//	public void getUserTest() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/4a7d8f96-01ba-4be9-91c3-32979f06925a")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonor"));
-//	}
-//	
-//	@Test
-//	public void getUserWithMobileTest1() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/01914820010?type=2")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonorMobile1"));
-//	}
-//	
-//	@Test
-//	public void getUserWithMobileTest2() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/01914820010?type=m")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonorMobile2"));
-//	}
-//	@Test
-//	public void getUserWithMobileTest3() throws Exception
-//	{
-//		this.mockMvc.perform(get("/user/01914820010?type=mobile")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("getDonorMobile3"));
-//	}
-//	
-//	@Test
-//	public void updateUserTest() throws Exception
-//	{
-//		Map<String, String> donorData = new HashMap<String, String>();
-//		donorData.put("mobile", "01914820010");
-//		donorData.put("name", "Saif");
-//		donorData.put("bloodGroup", "O+ve");
-//		donorData.put("birthDate", "10-09-1991");
-//		this.mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON)
-//				.content(this.objectMapper.writeValueAsString(donorData))) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("updateUser"));
-//	}
-//	
+	
+	@Test
+	public void authenticateTest() throws Exception
+	{
+		this.mockMvc.perform(post("/user/authenticate").contentType(MediaType.APPLICATION_JSON)
+				.content(this.objectMapper.writeValueAsString(Collections.singletonMap("firebase_token", "1234"))) ) 
+		.andExpect(status().isUnauthorized()) 
+		.andDo(document("authenticate"));
+	}
+	
+	@Test
+	public void getUserTest() throws Exception
+	{
+		this.mockMvc.perform(get("/user/")
+				.header("Authorization", "Bearer "+donorId))
+		.andExpect(status().isOk()) 
+		.andDo(document("getDonor"));
+	}
+
+	
+	@Test
+	public void updateUserTest() throws Exception
+	{
+
+		Donor donor=new Donor();
+		donor.setBloodGroup("0+ve");
+		donor.setBirthDate(new Date());
+		donor.setName("saif");
+		DonorLocation loc=new DonorLocation();
+		loc.setLatitute(1234);
+		loc.setLongitute(123666666);
+		donor.setLocation(loc);
+		
+		this.mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", "Bearer "+donorId)
+				.content(this.objectMapper.writeValueAsString(donor))) 
+		.andExpect(status().isOk()) 
+		.andDo(document("updateUser"));
+	}
+	
 //	@Test
 //	public void crateEventTest() throws Exception
 //	{

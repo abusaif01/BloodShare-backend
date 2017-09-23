@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.bloodshare.entity.Donor;
 import com.bloodshare.service.DonorService;
 
+@Component
 public class TokenFilter implements Filter
 {
 	private static final String HEADER_NAME="authorization";
@@ -39,7 +41,7 @@ public class TokenFilter implements Filter
 		final HttpServletRequest request = (HttpServletRequest) req;
 		final HttpServletResponse response =(HttpServletResponse) res;
 		logger.debug("URI "+request.getRequestURI());
-		if(request.getRequestURI().contains( "/authenticate"))
+		if(request.getRequestURI().contains( "/authenticate") || request.getRequestURI().equals("/"))
 		{
 			logger.debug("skipping /authenticate");
 			chain.doFilter(req, res);

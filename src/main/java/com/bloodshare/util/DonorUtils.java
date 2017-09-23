@@ -25,7 +25,11 @@ public class DonorUtils {
 		if(from.getStatus()!=null)
 			to.setStatus(from.getStatus());
 		if(from.getLocation()!=null)
+		{
+			if(to.getLocation()!=null)
+				from.getLocation().setId(to.getLocation().getId());
 			to.setLocation(from.getLocation());
+		}
 		else if (to.getLocation()==null) throw new DataMalFormException("Location cannot be empry");
 	}
 	

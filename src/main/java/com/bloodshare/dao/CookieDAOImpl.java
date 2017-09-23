@@ -6,6 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,7 @@ import com.bloodshare.entity.Donor;
 @Repository
 public class CookieDAOImpl implements CookieDAO
 {
-
+	Logger logger=LoggerFactory.getLogger(CookieDAOImpl.class);
 	private SessionFactory sessionFactory;
 	
 	@Autowired
@@ -38,6 +40,7 @@ public class CookieDAOImpl implements CookieDAO
 	@Override
 	public Cookie save(Cookie cookie) {
 		Session session = sessionFactory.getCurrentSession();
+		logger.debug("***** Saving Cookies");
 		session.saveOrUpdate(cookie);
 		return cookie;
 	}
@@ -54,8 +57,11 @@ public class CookieDAOImpl implements CookieDAO
 		
 		Session session=sessionFactory.getCurrentSession();
 		Criteria cr = session.createCriteria(Cookie.class);
-		cr.add(Restrictions.eq("donor", donor.getId()));
+		logger.debug("** in cookei dao "+donor.getId());
+		cr.add(Restrictions.eq("donor", donor));
+		logger.debug("** restrict added  ");
 		List<Cookie> list = cr.list();
+		logger.debug("** Returnig .......... ");
 		return list;
 	}
 

@@ -18,14 +18,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class DonorLocation {
 	
 	@Id
-	@Column(name="donor_id")
-	@GeneratedValue(generator="SharedPrimaryKeyGenerator")
-	@GenericGenerator(name="SharedPrimaryKeyGenerator",strategy="foreign",parameters =  @Parameter(name="property",value="donor"))
-	private String id;
+	@GeneratedValue
+	private int id;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@OneToOne(mappedBy="location", cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	private Donor donor;
 	
 	@Column
@@ -34,28 +31,68 @@ public class DonorLocation {
 	private double longitute;
 	
 	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+
 	public Donor getDonor() {
 		return donor;
 	}
+
+
+
+
 	public void setDonor(Donor donor) {
 		this.donor = donor;
 	}
+
+
+
+
 	public double getLatitute() {
 		return latitute;
 	}
+
+
+
+
 	public void setLatitute(double latitute) {
 		this.latitute = latitute;
 	}
+
+
+
+
 	public double getLongitute() {
 		return longitute;
 	}
+
+
+
+
 	public void setLongitute(double longitute) {
 		this.longitute = longitute;
 	}
-	public String getId() {
-		return id;
+
+
+
+
+	@Override
+	public String toString() {
+		return "DonorLocation [id=" + id + ", latitute=" + latitute + ", longitute=" + longitute + ", donorId="+((donor==null)?null:donor.getId())+"]";
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
+	
 }

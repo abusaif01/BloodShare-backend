@@ -4,11 +4,13 @@ import javax.persistence.EntityManagerFactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
 import com.adrjun.firebase.FireBaseAdmin;
+import com.bloodshare.filter.TokenFilter;
 
 @SpringBootApplication
 @ComponentScan("com")
@@ -26,8 +28,18 @@ public class SpringApplicationLauncher {
 	}
 	
 	@Bean
-	public FireBaseAdmin fireBase()
+	public FilterRegistrationBean tokenFilerRegister()
 	{
-		return new FireBaseAdmin();
+		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		registrationBean.setFilter(new TokenFilter());
+		registrationBean.addUrlPatterns("/*");
+		return registrationBean;
 	}
+	
+//	
+//	@Bean
+//	public FireBaseAdmin fireBase()
+//	{
+//		return new FireBaseAdmin();
+//	}
 }

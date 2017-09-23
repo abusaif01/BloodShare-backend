@@ -113,6 +113,13 @@ public class DonorServiceImpl implements DonorService
 			donorDAO.save(donor);
 		}
 		logger.debug("Donor : "+donor);
+		
+		List<Cookie> cookies = cookieDAO.read(donor);
+		if(cookies!=null && cookies.size()!=0)
+				if(cookies.size()>1)
+						new RuntimeException("Data Malform multiple Cookies");
+				else cookieDAO.delete(cookies.get(1));
+		
 		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
 		cookieDAO.save(new Cookie(cookieId, donor, new Date()));
 		return cookieId;
@@ -134,6 +141,7 @@ public class DonorServiceImpl implements DonorService
 	@Transactional
 	@Override
 	public Donor getDonorWithCookie(String cookieId) {
+		logger.debug("Reading donor with cookie");
 		Cookie cookie=cookieDAO.read(cookieId);
 		return cookie.getDonor();
 	}

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -95,14 +96,8 @@ public class DonorController {
 	
 	@RequestMapping(method = RequestMethod.GET, 
 			consumes="*",produces = "application/json")
-	public ResponseEntity<Donor>  getDonor( )
+	public ResponseEntity<Donor>  getDonor(@RequestAttribute(name="session_donor",required=true) Donor donor )
 	{
-		logger.debug("****************************");
-		logger.debug("retriving user with Cookie");
-		
-		Donor donor=donorService.getDonorWithMobileNo("+8801920500174");
-		if(donor==null)
-			return new ResponseEntity<Donor>(donor,HttpStatus.NOT_FOUND);
 		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
 	}
 	

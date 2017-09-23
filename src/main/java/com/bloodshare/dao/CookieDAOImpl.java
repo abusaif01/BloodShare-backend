@@ -1,11 +1,16 @@
 package com.bloodshare.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bloodshare.entity.Cookie;
+import com.bloodshare.entity.Donor;
 
 @Repository
 public class CookieDAOImpl implements CookieDAO
@@ -42,6 +47,16 @@ public class CookieDAOImpl implements CookieDAO
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(cookie);
 		return true;
+	}
+
+	@Override
+	public List<Cookie> read(Donor donor) {
+		
+		Session session=sessionFactory.getCurrentSession();
+		Criteria cr = session.createCriteria(Cookie.class);
+		cr.add(Restrictions.eq("donor", donor.getId()));
+		List<Cookie> list = cr.list();
+		return list;
 	}
 
 }

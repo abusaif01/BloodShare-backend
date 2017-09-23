@@ -18,6 +18,7 @@ import com.bloodshare.entity.Cookie;
 import com.bloodshare.entity.Donor;
 import com.bloodshare.util.DonorStatus;
 import com.bloodshare.util.DonorUtils;
+import com.bloodshare.util.exeption.DataMalFormException;
 
 
 @Service
@@ -61,15 +62,9 @@ public class DonorServiceImpl implements DonorService
 
 	@Transactional
 	@Override
-	public Donor updateDonor(Donor donor) {
-		List<Donor> tempList=donorDAO.readDonorWithMobileNo(donor.getMobile());
-		logger.info("save donor:  list size "+tempList.size());
-		if(tempList==null || tempList.size()==0)
-			return null;
-		Donor donorOriginal=donorDAO.readDonorWithMobileNo(donor.getMobile()).get(0);
-		DonorUtils.copyAttrib(donor, donorOriginal);
-		
-		return donorDAO.save(donorOriginal);
+	public Donor updateDonor(Donor donor,Donor donorNew) throws DataMalFormException {
+		DonorUtils.copyAttrib(donorNew, donor);
+		return donorDAO.update(donor);
 	}
 
 	@Transactional

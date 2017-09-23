@@ -1,5 +1,6 @@
 package com.bloodshare.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bloodshare.entity.Donor;
+import com.bloodshare.entity.DonorLocation;
 import com.bloodshare.service.DonorService;
+import com.bloodshare.util.exeption.DataMalFormException;
 
 
 @RestController
@@ -74,41 +77,43 @@ public class DonorController {
 			consumes="*",produces = "application/json")
 	public ResponseEntity<Donor>  getDonor(@RequestAttribute(name="session_donor",required=true) Donor donor )
 	{
+		if(donor.getLocation()==null)
+			donor.setLocation(new DonorLocation());
 		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET, 
-			consumes="*",produces = "application/json")
-	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId, @RequestParam(required=false,name="type") String idType)
-	{
-		Donor donor=null;
-		if(idType!=null && ( idType.equalsIgnoreCase("2") || idType.equalsIgnoreCase("m") || idType.equalsIgnoreCase("mobile")))
-		{
-			logger.debug("retriving user with MObile NO");
-			donor = donorService.getDonorWithMobileNo(donorId);
-			logger.debug("donor found "+donor);
-		}
-		else {
-			donor=donorService.getDonorWithId(donorId);
-			logger.debug("retriving user with ID");
-		}
-		if(donor==null)
-			return new ResponseEntity<Donor>(donor,HttpStatus.NOT_FOUND);
-		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
-	}
+//	@RequestMapping(value="/{id}", method = RequestMethod.GET, 
+//			consumes="*",produces = "application/json")
+//	public ResponseEntity<Donor>  getDonorWithId(@PathVariable("id") String donorId, @RequestParam(required=false,name="type") String idType)
+//	{
+//		Donor donor=null;
+//		if(idType!=null && ( idType.equalsIgnoreCase("2") || idType.equalsIgnoreCase("m") || idType.equalsIgnoreCase("mobile")))
+//		{
+//			logger.debug("retriving user with MObile NO");
+//			donor = donorService.getDonorWithMobileNo(donorId);
+//			logger.debug("donor found "+donor);
+//		}
+//		else {
+//			donor=donorService.getDonorWithId(donorId);
+//			logger.debug("retriving user with ID");
+//		}
+//		if(donor==null)
+//			return new ResponseEntity<Donor>(donor,HttpStatus.NOT_FOUND);
+//		return new ResponseEntity<Donor>(donor,HttpStatus.OK);
+//	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST, 
 			consumes="application/json")
-	public ResponseEntity<Donor>  updateDonor(/*@CookieValue("SESSION_ID") String sessionId,*/@RequestBody Donor donor)
+	public ResponseEntity<?>  updateDonor(@RequestAttribute(name="session_donor",required=true) Donor donor,@RequestBody Donor donorToUpdate)
 	{
-		logger.debug("Saving Donor :"+donor);
-//		Donor originalDonor=donorService.getDonorWithCookie(sessionId);
-//		if(originalDonor==null)
-//			return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
-//		
-//		donor.setId(originalDonor.getId());
-		Donor donorUpdated = donorService.updateDonor(donor);
+		logger.debug("New Donor Data:"+donorToUpdate);
+		Donor donorUpdated = donorToUpdate;
+		try {
+			donorUpdated = donorService.updateDonor(donor, donorToUpdate);
+		} catch (DataMalFormException e) {
+			return new ResponseEntity<Map<String,String>>(Collections.singletonMap("message", e.getMessage()),HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 	}
 }

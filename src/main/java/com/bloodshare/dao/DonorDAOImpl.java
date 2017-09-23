@@ -39,7 +39,10 @@ public class DonorDAOImpl implements DonorDAO
 
 	@Override
 	public Donor update(Donor t) {
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		session.update(t);
+		logger.debug("Donor updated");
+		return t;
 	}
 
 	@Override

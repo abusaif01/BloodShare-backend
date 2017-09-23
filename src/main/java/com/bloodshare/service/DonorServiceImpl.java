@@ -143,6 +143,8 @@ public class DonorServiceImpl implements DonorService
 	public Donor getDonorWithCookie(String cookieId) {
 		logger.debug("Reading donor with cookie");
 		Cookie cookie=cookieDAO.read(cookieId);
+		if(cookie==null)
+			return null;
 		return cookie.getDonor();
 	}
 }

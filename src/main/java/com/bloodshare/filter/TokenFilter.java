@@ -35,11 +35,13 @@ public class TokenFilter implements Filter
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		logger.debug("\n\\INSIDE THE FILER ");
+		logger.debug("\nINSIDE THE FILER ");
 		final HttpServletRequest request = (HttpServletRequest) req;
 		final HttpServletResponse response =(HttpServletResponse) res;
+		logger.debug("URI "+request.getRequestURI());
 		if(request.getRequestURI().contains( "/authenticate"))
 		{
+			logger.debug("skipping /authenticate");
 			chain.doFilter(req, res);
 			return;
 		}
@@ -49,6 +51,7 @@ public class TokenFilter implements Filter
 		
 		if (authHeader == null || !authHeader.startsWith(TOKEN_PREFIX)) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			response.getWriter().append("{\"message\":\"authentication header incorect\"}");
 			return;
 		}
 		String token = authHeader.substring(TOKEN_PREFIX.length());
@@ -59,6 +62,7 @@ public class TokenFilter implements Filter
 		if(donor==null)
 		{
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			response.getWriter().append("{\"message\":\"No data found for provided token\"}");
 			return;
 		}
 		

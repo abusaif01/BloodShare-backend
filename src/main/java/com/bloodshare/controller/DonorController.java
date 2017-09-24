@@ -108,13 +108,15 @@ public class DonorController {
 			consumes="application/json",produces="application/json")
 	public ResponseEntity<?>  updateDonor(@RequestAttribute(name="session_donor",required=true) Donor donor,@RequestBody Donor donorToUpdate)
 	{
-		logger.debug("New Donor Data:"+donorToUpdate);
+		logger.debug("In donorUpdate New Donor Data:"+donorToUpdate);
 		Donor donorUpdated = donorToUpdate;
 		try {
 			donorUpdated = donorService.updateDonor(donor, donorToUpdate);
 		} catch (DataMalFormException e) {
+			logger.debug("Returning Bad Request");
 			return new ResponseEntity<Map<String,String>>(Collections.singletonMap("message", e.getMessage()),HttpStatus.BAD_REQUEST);
 		}
+		logger.debug("returnign Updated DONOR");
 		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 	}
 }

@@ -37,7 +37,7 @@ public class TokenFilter implements Filter
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 			throws IOException, ServletException {
-		logger.debug("\nINSIDE THE FILER ");
+		logger.debug("\n\n\n****INSIDE THE FILER ");
 		final HttpServletRequest request = (HttpServletRequest) req;
 		final HttpServletResponse response =(HttpServletResponse) res;
 		logger.debug("URI "+request.getRequestURI());

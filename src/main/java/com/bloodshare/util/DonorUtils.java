@@ -32,14 +32,6 @@ public class DonorUtils {
 				from.getLocation().setId(to.getLocation().getId());
 			to.setLocation(from.getLocation());
 		}
-		else if(from.getLocationInString()!=null)
-		{
-			DonorLocation loaction=GoogleLoactionUtil.convertLoaction(from.getLocationInString());
-			if(to.getLocation()!=null)
-				loaction.setId(to.getLocation().getId());
-			to.setLocation(loaction);
-		}
-		else if (to.getLocation()==null) throw new DataMalFormException("Location cannot be empry");
 	}
 	public static boolean isDonorInfoValid(Donor donor)
 	{

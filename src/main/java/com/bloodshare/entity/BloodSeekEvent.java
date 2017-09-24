@@ -52,7 +52,7 @@ public class BloodSeekEvent {
 	
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_Id")
+	@JoinColumn(name="donor_in_need")
 	private Donor userInNeed;
 
 	@JsonIgnore

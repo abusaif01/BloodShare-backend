@@ -17,11 +17,11 @@ public class DonorForEvent {
 	private DonorForEventPk donorForEventPk;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="donor_id")
+	@JoinColumn(name="donor_id",insertable = false, updatable = false)
 	private Donor donor;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="event_id")
+	@JoinColumn(name="event_id",insertable = false, updatable = false)
 	private BloodSeekEvent event;
 
 	@Enumerated(EnumType.ORDINAL)

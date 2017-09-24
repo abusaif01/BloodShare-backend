@@ -50,6 +50,7 @@ public class Donor {
 	@JoinColumn(name="location_id")
 	private DonorLocation location;
 	
+	private String locationInString;
 	
 	
 
@@ -57,111 +58,73 @@ public class Donor {
 		return id;
 	}
 
-
-
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-
-
 
 	public String getFireId() {
 		return fireId;
 	}
 
-
-
-
 	public void setFireId(String fireId) {
 		this.fireId = fireId;
 	}
-
-
-
 
 	public String getMobile() {
 		return mobile;
 	}
 
-
-
-
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-
-
-
 
 	public String getName() {
 		return name;
 	}
 
-
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
-
 
 	public String getBloodGroup() {
 		return bloodGroup;
 	}
 
-
-
-
 	public void setBloodGroup(String bloodGroup) {
 		this.bloodGroup = bloodGroup;
 	}
-
-
-
 
 	public Date getBirthDate() {
 		return birthDate;
 	}
 
-
-
-
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
-
-
-
 
 	public DonorStatus getStatus() {
 		return status;
 	}
 
-
-
-
 	public void setStatus(DonorStatus status) {
 		this.status = status;
 	}
-
-
-
 
 	public DonorLocation getLocation() {
 		return location;
 	}
 
-
-
-
 	public void setLocation(DonorLocation location) {
 		this.location = location;
 	}
 
+	public String getLocationInString() {
+		return locationInString;
+	}
+
+	public void setLocationInString(String locationInString) {
+		this.locationInString = locationInString;
+	}
 
 
 

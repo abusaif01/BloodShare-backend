@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bloodshare.entity.Donor;
 import com.bloodshare.entity.DonorLocation;
 import com.bloodshare.service.DonorService;
+import com.bloodshare.util.DonorUtils;
 import com.bloodshare.util.exeption.DataMalFormException;
 
 
@@ -58,7 +59,7 @@ public class DonorController {
 		}
 		Donor donor=donorService.getDonorWithFireUid(fireUid);
 		
-		boolean isUserNew= (donor==null)?true:false;
+		boolean isUserNew= (donor==null || !DonorUtils.isDonorInfoValid(donor))?true:false;
 		logger.debug("isUserNew "+isUserNew);
 		logger.debug("\nGoing to call start session");
 		String accessToken=donorService.startSession(fireUid,donor);

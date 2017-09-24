@@ -99,6 +99,19 @@ public class FireBaseAdmin implements OnFailureListener
 		return task.getResult().getPhoneNumber();
 	}
 
+	public void delteUser(String uid)
+	{
+		FirebaseAuth.getInstance().deleteUser(uid)
+		.addOnSuccessListener(new OnSuccessListener<Void>() {
+
+			@Override
+			public void onSuccess(Void arg0) {
+				logger.debug("Deleted");
+			}
+		})
+		.addOnFailureListener(this);
+	}
+	
 	@Override
 	public void onFailure(Exception excpetion) {
 		excpetion.printStackTrace();

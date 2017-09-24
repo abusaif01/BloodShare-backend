@@ -41,7 +41,7 @@ public class CookieDAOImpl implements CookieDAO
 	public Cookie save(Cookie cookie) {
 		Session session = sessionFactory.getCurrentSession();
 		logger.debug("***** Saving Cookies");
-		session.saveOrUpdate(cookie);
+		session.merge(cookie);
 		return cookie;
 	}
 

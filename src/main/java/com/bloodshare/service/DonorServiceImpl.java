@@ -63,7 +63,7 @@ public class DonorServiceImpl implements DonorService
 	@Transactional
 	@Override
 	public Donor updateDonor(Donor donor,Donor donorNew) throws DataMalFormException {
-		DonorUtils.copyAttrib(donorNew, donor);
+		DonorUtils.validateAndCopyAttrib(donorNew, donor);
 		logger.debug("gooing to update Donor "+donor);
 		return donorDAO.update(donor);
 	}
@@ -113,10 +113,11 @@ public class DonorServiceImpl implements DonorService
 		List<Cookie> cookies = cookieDAO.read(donor);
 		logger.debug("cookied read done"+cookies.size());
 		
-		if(cookies!=null && cookies.size()!=0)
-				if(cookies.size()>1)
-						new RuntimeException("Data Malform multiple Cookies");
-				else cookieDAO.delete(cookies.get(0));
+		if(cookies!=null && cookies.size()==1)
+			return cookies.get(0).getCookieId();
+		
+		if(cookies!=null && cookies.size()>1)
+				new RuntimeException("Data Malform multiple Cookies");
 		
 		String cookieId= CookiesIdGenerator.getInstance().generateCookiesId(donor.getId());
 		logger.debug("Saving cookie");

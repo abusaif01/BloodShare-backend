@@ -18,4 +18,11 @@ public class FireBaseTest {
 		assertNotEquals(null, uid);
 		assertNotEquals(null, firebase.getUserPhoneNumber(uid));
 	}
+	
+	@Test
+	public void delteUser()
+	{
+		FireBaseAdmin firebase=new FireBaseAdmin();
+		firebase.delteUser("XCtKXWg40hZbrxOQJ4trHrJgwvm2");
+	}
 }

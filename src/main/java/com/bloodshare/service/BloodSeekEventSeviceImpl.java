@@ -32,10 +32,10 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	@Override
 	@Transactional
 	public BloodSeekEvent createNewEvent(BloodSeekEvent event) {
-		event= eventDao.save(event);
-		logger.debug("Event saved "+event);
+//		event= eventDao.save(event);
+//		logger.debug("Event saved "+event);
 		
-		List<DonorLocation> searchedDonorList=this.searchDonorBasedOnLocation(event.getLocation(),100,this.calculateUserToFind(event));
+		List<DonorLocation> searchedDonorList=this.searchDonorBasedOnLocation(event.getLocation(),1,this.calculateUserToFind(event));
 		
 		this.sentNotification(searchedDonorList);
 		
@@ -53,9 +53,10 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 		LocationBasedSearch locationSearch=new LocationBasedSearch();
 		double[] boundingCoordinates=locationSearch.findBoundingCoordinates(location, distanceParameter);
 		List<DonorLocation> searchResult=donorLocationDao.searchEntryWithBoundingCoordinate(boundingCoordinates);
-		
+		logger.debug("seacrch Resulot "+searchResult.size());
 		for (DonorLocation donorLocation : searchResult) {
-			logger.debug("\nLoacation Found : "+ location.getLatitute()+" , "+location.getLongitute());
+			logger.debug("Loacation Found :"+donorLocation.getLocation()+" "+ donorLocation.getLatitute()+" , "+donorLocation.getLongitute());
+			logger.debug("Loacation Found :"+donorLocation);
 		}
 		searchResult= this.filterLocationSearchResult(searchResult, searchLimit);
 		return searchResult;

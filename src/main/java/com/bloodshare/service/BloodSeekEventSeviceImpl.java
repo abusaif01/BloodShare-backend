@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.adrjun.search.LocationBasedSearch;
 import com.bloodshare.dao.BloodSeekEventDAO;
+import com.bloodshare.dao.DonorLocationDAO;
 import com.bloodshare.entity.BloodSeekEvent;
 import com.bloodshare.entity.Donor;
+import com.bloodshare.entity.DonorLocation;
+import com.bloodshare.entity.Location;
 
 @Service
 public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
@@ -18,12 +22,11 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 
 	private static final Logger logger = LoggerFactory.getLogger(BloodSeekEventSeviceImpl.class);
 
-	BloodSeekEventDAO eventDao;
-	
 	@Autowired
-	public void setEventDao(BloodSeekEventDAO eventDao) {
-		this.eventDao = eventDao;
-	}
+	BloodSeekEventDAO eventDao;
+	@Autowired
+	DonorLocationDAO donorLocationDao;
+	
 
 
 	@Override
@@ -31,10 +34,10 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	public BloodSeekEvent createNewEvent(BloodSeekEvent event) {
 		event= eventDao.save(event);
 		logger.debug("Event saved "+event);
-		List<Donor> searchedDonorList=this.searchDonorBasedOnLocation(event.getLocation(), this.calculateUserToFind(event));
+		
+		List<DonorLocation> searchedDonorList=this.searchDonorBasedOnLocation(event.getLocation(),100,this.calculateUserToFind(event));
 		
 		this.sentNotification(searchedDonorList);
-		
 		
 		return event;
 		
@@ -42,15 +45,29 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	
 	private int calculateUserToFind(BloodSeekEvent event)
 	{
-		return 0;
+		return (event.getQunatity()-(event.getConfirmed()+event.getWaiting()));
 	}
 	
-	private List<Donor> searchDonorBasedOnLocation(String location,int searchLimit)
+	private List<DonorLocation> searchDonorBasedOnLocation(Location location,double distanceParameter,int searchLimit)
 	{
-		return null;
+		LocationBasedSearch locationSearch=new LocationBasedSearch();
+		double[] boundingCoordinates=locationSearch.findBoundingCoordinates(location, distanceParameter);
+		List<DonorLocation> searchResult=donorLocationDao.searchEntryWithBoundingCoordinate(boundingCoordinates);
+		
+		for (DonorLocation donorLocation : searchResult) {
+			logger.debug("\nLoacation Found : "+ location.getLatitute()+" , "+location.getLongitute());
+		}
+		searchResult= this.filterLocationSearchResult(searchResult, searchLimit);
+		return searchResult;
+		
 	}
 	
-	private boolean sentNotification(List<Donor> donorList)
+	private List<DonorLocation>filterLocationSearchResult(List<DonorLocation> result,int limit)
+	{
+		return result;
+	}
+	
+	private boolean sentNotification(List<DonorLocation> donorList)
 	{
 		return true;
 	}

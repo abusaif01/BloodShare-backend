@@ -50,10 +50,6 @@ public class Donor {
 	@JoinColumn(name="location_id")
 	private DonorLocation location;
 	
-	private String locationInString;
-	
-	
-
 	public String getId() {
 		return id;
 	}
@@ -117,15 +113,6 @@ public class Donor {
 	public void setLocation(DonorLocation location) {
 		this.location = location;
 	}
-
-	public String getLocationInString() {
-		return locationInString;
-	}
-
-	public void setLocationInString(String locationInString) {
-		this.locationInString = locationInString;
-	}
-
 
 
 	@Override

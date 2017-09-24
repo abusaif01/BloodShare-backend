@@ -1,16 +1,20 @@
 package com.bloodshare.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="blood_seek_event")
 public class BloodSeekEvent {
@@ -33,8 +37,9 @@ public class BloodSeekEvent {
 	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
 	private Date createdDate; 
 	
-	@Column(name="location")
-	private String location;
+	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.REMOVE,orphanRemoval=true)
+	@JoinColumn(name="location_id")
+	private EventLocation location;
 	
 	@Column(name="image")
 	private String image;
@@ -45,10 +50,15 @@ public class BloodSeekEvent {
 	@Column(name="waiting_donor")
 	private int waiting;
 	
+	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_Id")
 	private Donor userInNeed;
 
+	@JsonIgnore
+	@OneToMany(mappedBy="event",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,orphanRemoval = true)
+	List<DonorForEvent> donorForEvent;
+	
 	public int getId() {
 		return id;
 	}
@@ -89,11 +99,11 @@ public class BloodSeekEvent {
 		this.createdDate = createdDate;
 	}
 
-	public String getLocation() {
+	public EventLocation getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(EventLocation location) {
 		this.location = location;
 	}
 

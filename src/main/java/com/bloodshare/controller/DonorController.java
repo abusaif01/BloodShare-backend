@@ -105,7 +105,7 @@ public class DonorController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST, 
-			consumes="application/json")
+			consumes="application/json",produces="application/json")
 	public ResponseEntity<?>  updateDonor(@RequestAttribute(name="session_donor",required=true) Donor donor,@RequestBody Donor donorToUpdate)
 	{
 		logger.debug("New Donor Data:"+donorToUpdate);

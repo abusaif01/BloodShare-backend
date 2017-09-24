@@ -8,25 +8,25 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class DonorLocation extends Location
+public class EventLocation extends Location
 {
-	
 	@JsonIgnore
 	@OneToOne(mappedBy="location", cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	private Donor donor;
+	private BloodSeekEvent event;
 
-	public Donor getDonor() {
-		return donor;
+	public BloodSeekEvent getEvent() {
+		return event;
 	}
 
-	public void setDonor(Donor donor) {
-		this.donor = donor;
+	public void setEvent(BloodSeekEvent event) {
+		this.event = event;
 	}
-
+	
 
 	@Override
 	public String toString() {
-		return "DonorLocation ["+super.toString()+", donorId="+((donor==null)?null:donor.getId())+"]";
+		return "DonorLocation ["+super.toString()+", eventID="+((event==null)?null:event.getId())+"]";
 	}
+	
 	
 }

@@ -59,7 +59,7 @@ public class DonorController {
 		}
 		Donor donor=donorService.getDonorWithFireUid(fireUid);
 		
-		boolean isUserNew= (donor==null || !DonorUtils.isDonorInfoValid(donor))?true:false;
+		boolean isUserNew= (donor==null);
 		logger.debug("isUserNew "+isUserNew);
 		logger.debug("\nGoing to call start session");
 		String accessToken=donorService.startSession(fireUid,donor);

@@ -35,8 +35,8 @@ public class DonorUtils {
 	}
 	public static boolean isDonorInfoValid(Donor donor)
 	{
-		if(donor.getBirthDate()== null || donor.getBloodGroup()==null 
-				|| donor.getLocation()==null)
+		if(donor.getBirthDate()== null && donor.getBloodGroup()==null 
+				&& donor.getLocation()==null)
 			return false;
 		return true;
 	}

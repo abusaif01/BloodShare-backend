@@ -27,11 +27,7 @@ public class DonorUtils {
 		if(from.getStatus()!=null)
 			to.setStatus(from.getStatus());
 		if(from.getLocation()!=null)
-		{
-			if(to.getLocation()!=null)
-				from.getLocation().setId(to.getLocation().getId());
 			to.setLocation(from.getLocation());
-		}
 	}
 	public static boolean isDonorInfoValid(Donor donor)
 	{

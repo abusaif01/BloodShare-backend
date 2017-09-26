@@ -10,25 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @MappedSuperclass
 public class Location {
 
-	@JsonIgnore
-	@Id
-	@GeneratedValue
-	private int id;
-	
 	@Column 
 	private String location;
 	@Column
 	private double latitute;
 	@Column
 	private double longitute;
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public String getLocation() {
 		return location;
@@ -51,7 +38,7 @@ public class Location {
 	
 	@Override
 	public String toString() {
-		return "Location [id=" + id + ", location=" + location + ", latitute=" + latitute + ", longitute=" + longitute
+		return "Location [location=" + location + ", latitute=" + latitute + ", longitute=" + longitute
 				+ "]";
 	}
 	

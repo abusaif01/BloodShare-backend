@@ -1,19 +1,40 @@
 package com.bloodshare.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class EventLocation extends Location
 {
+	@Id
+	@Column(name="event_id")
+	@GeneratedValue(generator="SharedPrimaryKeyGenerator")
+	@GenericGenerator(name="SharedPrimaryKeyGenerator",strategy="foreign",parameters =  @Parameter(name="property",value="event"))
+	String id;
+	
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="event_id")
+	@PrimaryKeyJoinColumn
 	private BloodSeekEvent event;
+
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public BloodSeekEvent getEvent() {
 		return event;

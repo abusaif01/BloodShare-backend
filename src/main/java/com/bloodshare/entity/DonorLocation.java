@@ -1,8 +1,8 @@
 package com.bloodshare.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class DonorLocation extends Location
 {
-	
 	@JsonIgnore
-	@OneToOne(mappedBy="location", cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="donor_id")
 	private Donor donor;
 
 	public Donor getDonor() {

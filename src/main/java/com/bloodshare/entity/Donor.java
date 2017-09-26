@@ -46,8 +46,7 @@ public class Donor {
 	@Enumerated(EnumType.ORDINAL)
 	private DonorStatus status;
 	
-	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(name="location_id")
+	@OneToOne(mappedBy="donor",fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private DonorLocation location;
 	
 	public String getId() {

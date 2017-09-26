@@ -37,8 +37,7 @@ public class BloodSeekEvent {
 	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
 	private Date createdDate; 
 	
-	@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.REMOVE,orphanRemoval=true)
-	@JoinColumn(name="location_id")
+	@OneToOne(mappedBy="event",fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
 	private EventLocation location;
 	
 	@Column(name="image")

@@ -2,24 +2,10 @@ package com.adrjun.search.location;
 
 import java.sql.SQLException;
 
-/**
- * <p>See
- * <a href="http://JanMatuschek.de/LatitudeLongitudeBoundingCoordinates#Java">
- * http://JanMatuschek.de/LatitudeLongitudeBoundingCoordinates#Java</a>
- * for the GeoLocation class referenced from this code.</p>
- *
- * @author Jan Philip Matuschek
- * @version 26 May 2010
- */
+
 public class GeoLocationDemo {
 
-	/**
-	 * @param radius radius of the sphere.
-	 * @param location center of the query circle.
-	 * @param distance radius of the query circle.
-	 * @param connection an SQL connection.
-	 * @return places within the specified distance from location.
-	 */
+	
 	public static java.sql.ResultSet findPlacesWithinDistance(
 			double radius, GeoLocation location, double distance,
 			java.sql.Connection connection) throws java.sql.SQLException {

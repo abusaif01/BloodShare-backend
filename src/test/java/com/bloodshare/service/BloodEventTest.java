@@ -1,7 +1,6 @@
-package com.bloodshare.controller;
+package com.bloodshare.service;
 
 
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,14 +13,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.bloodshare.entity.BloodSeekEvent;
-import com.bloodshare.entity.Donor;
-import com.bloodshare.entity.DonorLocation;
 import com.bloodshare.entity.EventLocation;
 import com.bloodshare.filter.TokenFilter;
-import com.bloodshare.service.BloodSeekEventSevice;
-import com.bloodshare.service.DonorService;
-import com.bloodshare.service.DonorServiceImpl;
-import com.bloodshare.util.DonorStatus;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

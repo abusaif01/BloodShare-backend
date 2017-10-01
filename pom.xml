@@ -52,11 +52,13 @@
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.google.firebase</groupId>
 			<artifactId>firebase-admin</artifactId>
+			<version>5.3.1</version>
 		</dependency>
 		
 		
@@ -126,18 +128,4 @@
 		</plugins>
 	</build>
 	
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>postgresql</groupId>
-				<artifactId>postgresql</artifactId>
-				<version>9.1-901-1.jdbc4</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.firebase</groupId>
-				<artifactId>firebase-admin</artifactId>
-				<version>5.3.1</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

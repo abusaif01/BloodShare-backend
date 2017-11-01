@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -119,4 +120,11 @@ public class DonorController {
 		logger.debug("returnign Updated DONOR");
 		return new ResponseEntity<Donor>(donorUpdated,HttpStatus.OK);
 	}
+	
+	@DeleteMapping
+	public ResponseEntity<Boolean> deleteDonor(@RequestAttribute(name="session_donor",required=true) Donor donor)
+	{
+		return new ResponseEntity<Boolean>(donorService.deleteDonor(donor), HttpStatus.OK) ;
+	}
+	
 }

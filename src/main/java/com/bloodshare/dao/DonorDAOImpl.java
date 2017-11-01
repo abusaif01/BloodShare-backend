@@ -62,7 +62,10 @@ public class DonorDAOImpl implements DonorDAO
 
 	@Override
 	public boolean delete(Donor t) {
-		return false;
+		Session session=sessionFactory.getCurrentSession();
+		t=(Donor) session.merge(t);
+		session.delete(t);
+		return true;
 	}
 
 	@Override

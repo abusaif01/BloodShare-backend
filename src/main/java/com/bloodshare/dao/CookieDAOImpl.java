@@ -48,7 +48,7 @@ public class CookieDAOImpl implements CookieDAO
 	@Override
 	public boolean delete(Cookie cookie) {
 		Session session = sessionFactory.getCurrentSession();
-		session.delete(cookie);
+		session.delete(session.merge(cookie));
 		return true;
 	}
 

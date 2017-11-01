@@ -147,4 +147,13 @@ public class DonorServiceImpl implements DonorService
 			return null;
 		return cookie.getDonor();
 	}
+
+	@Transactional
+	@Override
+	public boolean deleteDonor(Donor donor) {
+		
+		Cookie cookie = cookieDAO.read(donor).get(0);
+		cookieDAO.delete(cookie);
+		return donorDAO.delete(donor);
+	}
 }

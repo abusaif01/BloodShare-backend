@@ -12,4 +12,6 @@ public interface DonorService {
 	public Donor getDonorWithMobileNo(String mobile);
 	public Donor getDonorWithFireUid(String fireBaseUid);
 	public String startSession(String fireUid,Donor donor);
+	
+	public boolean deleteDonor(Donor donor);
 }

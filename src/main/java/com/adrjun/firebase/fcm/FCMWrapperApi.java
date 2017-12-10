@@ -36,7 +36,6 @@ public class FCMWrapperApi {
 		HttpResponse  response = httpClient.execute(post);
 		System.out.println(response);
 		
-		
 		return true;		
 	}
 

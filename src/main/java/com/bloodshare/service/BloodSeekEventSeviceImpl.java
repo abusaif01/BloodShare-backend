@@ -32,12 +32,12 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	@Override
 	@Transactional
 	public BloodSeekEvent createNewEvent(BloodSeekEvent event) {
-//		event= eventDao.save(event);
-//		logger.debug("Event saved "+event);
+		event= eventDao.save(event);
+		logger.debug("Event saved "+event);
 		
-		List<DonorLocation> searchedDonorList=this.searchDonorBasedOnLocation(event.getLocation(),1,this.calculateUserToFind(event));
+//		List<DonorLocation> searchedDonorList=this.searchDonorBasedOnLocation(event.getLocation(),1,this.calculateUserToFind(event));
 		
-		this.sentNotification(searchedDonorList);
+//		this.sentNotification(searchedDonorList);
 		
 		return event;
 		
@@ -75,5 +75,10 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	private void scheduleNextCheck()
 	{
 		
+	}
+
+	@Override
+	public BloodSeekEvent getEventById(String id) {
+		return eventDao.read(id);
 	}
 }

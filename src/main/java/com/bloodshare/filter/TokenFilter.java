@@ -70,6 +70,7 @@ public class TokenFilter implements Filter
 		}
 		
 		request.setAttribute("session_donor", donor);
+		logger.debug("Donor dlf;kjdslkajfal;dkjflkds");
 		chain.doFilter(req, res);
 	}
 	

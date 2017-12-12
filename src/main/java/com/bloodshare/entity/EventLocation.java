@@ -20,7 +20,7 @@ public class EventLocation extends Location
 	@Column(name="event_id")
 	@GeneratedValue(generator="SharedPrimaryKeyGenerator")
 	@GenericGenerator(name="SharedPrimaryKeyGenerator",strategy="foreign",parameters =  @Parameter(name="property",value="event"))
-	String id;
+	int id;
 	
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
@@ -28,11 +28,11 @@ public class EventLocation extends Location
 	private BloodSeekEvent event;
 
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

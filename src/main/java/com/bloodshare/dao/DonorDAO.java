@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 
 import com.bloodshare.entity.Donor;
 
-public interface DonorDAO extends GenericDAO<Donor>
+public interface DonorDAO extends GenericDAO<Donor,String>
 {
 	public List<Donor> readDonorWithMobileNo(String mobileNo); 
 	public List<Donor> readDonorWithFireID(String fireId); 

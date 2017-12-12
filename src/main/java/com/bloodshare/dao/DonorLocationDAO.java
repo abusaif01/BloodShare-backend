@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bloodshare.entity.DonorLocation;
 
-public interface DonorLocationDAO extends GenericDAO<DonorLocation>
+public interface DonorLocationDAO extends GenericDAO<DonorLocation,String>
 {
 	List<DonorLocation> searchEntryWithBoundingCoordinate(double[] coordinates);
 }

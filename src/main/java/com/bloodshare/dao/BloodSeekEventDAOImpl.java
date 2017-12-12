@@ -1,5 +1,7 @@
 package com.bloodshare.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,15 @@ public class BloodSeekEventDAOImpl implements BloodSeekEventDAO
 	}
 	
 	@Override
-	public BloodSeekEvent read(String id) {
-		return null;
+	public BloodSeekEvent read(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		List result = sessionFactory.getCurrentSession()
+				.createQuery("from com.bloodshare.entity.BloodSeekEvent a where a.id = :id ")
+				.setParameter("id", id)
+				.list();
+		System.out.println(result);
+		return session.get(BloodSeekEvent.class, id);
+//		return null;
 	}
 
 	@Override

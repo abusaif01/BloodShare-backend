@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import com.adrjun.firebase.FireBaseAdmin;
 import com.bloodshare.filter.TokenFilter;
@@ -36,6 +37,16 @@ public class SpringApplicationLauncher {
 		return registrationBean;
 	}
 	
+	@Bean
+    public CommonsRequestLoggingFilter logFilter() {
+        CommonsRequestLoggingFilter filter
+          = new CommonsRequestLoggingFilter();
+        filter.setIncludeQueryString(true);
+        filter.setIncludePayload(true);
+        filter.setIncludeHeaders(false);
+        filter.setAfterMessagePrefix("REQUEST DATA : ");
+        return filter;
+    }
 //	
 //	@Bean
 //	public FireBaseAdmin fireBase()

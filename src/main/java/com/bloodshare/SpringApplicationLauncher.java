@@ -43,7 +43,7 @@ public class SpringApplicationLauncher {
           = new CommonsRequestLoggingFilter();
         filter.setIncludeQueryString(true);
         filter.setIncludePayload(true);
-        filter.setMaxPayloadLength(1000000000);
+        filter.setMaxPayloadLength(100000);
         filter.setIncludeHeaders(false);
         filter.setAfterMessagePrefix("REQUEST DATA : ");
         return filter;

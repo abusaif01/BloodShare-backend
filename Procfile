@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/BloodShare-backend-Release.01.jar
+web: java -javaagent:heroku-javaagent-2.0.jar=stdout=true,lxmem=true -Dserver.port=$PORT -cp  target/BloodShare-backend-Release.01.jar com.bloodshare.SpringApplicationLauncher

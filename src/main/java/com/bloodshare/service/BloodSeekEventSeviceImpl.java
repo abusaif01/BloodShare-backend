@@ -55,7 +55,6 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 		List<DonorLocation> searchResult=donorLocationDao.searchEntryWithBoundingCoordinate(boundingCoordinates);
 		logger.debug("seacrch Resulot "+searchResult.size());
 		for (DonorLocation donorLocation : searchResult) {
-			logger.debug("Loacation Found :"+donorLocation.getLocation()+" "+ donorLocation.getLatitute()+" , "+donorLocation.getLongitute());
 			logger.debug("Loacation Found :"+donorLocation);
 		}
 		searchResult= this.filterLocationSearchResult(searchResult, searchLimit);

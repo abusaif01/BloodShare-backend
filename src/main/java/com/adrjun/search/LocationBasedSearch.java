@@ -17,7 +17,7 @@ public class LocationBasedSearch {
 	public double[] findBoundingCoordinates(Location location,double distanceInKm)
 	{
 		
-		GeoLocation loc=GeoLocation.fromDegrees(location.getLatitute(), location.getLongitute());
+		GeoLocation loc=GeoLocation.fromDegrees(location.getLatitude(), location.getLongitude());
 		GeoLocation[] boundingCordinates = loc.boundingCoordinates(distanceInKm, EARTH_RADUIUS);
 		
 		double [] points=new double[4];

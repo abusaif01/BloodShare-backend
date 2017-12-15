@@ -72,8 +72,8 @@ public class BloodEventTest {
 		event.setBooldGroup("0+");
 		event.setQunatity(5);
 		EventLocation location=new EventLocation();
-		location.setLatitute(23.833854);
-		location.setLongitute(90.386559);
+		location.setLatitude(23.833854);
+		location.setLongitude(90.386559);
 		event.setLocation(location);
 		eventService.createNewEvent(event);
 	}

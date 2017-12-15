@@ -76,8 +76,8 @@ public class ApiDocumentation {
 			donor.setId(donorId);
 			donor.setBirthDate(new Date());
 			DonorLocation loc=new DonorLocation();
-			loc.setLatitute(0.999999);
-			loc.setLatitute(0.11111);
+			loc.setLatitude(0.999999);
+			loc.setLatitude(0.11111);
 			loc.setDonor(donor);
 			donor.setLocation(loc );
 			
@@ -131,8 +131,8 @@ public class ApiDocumentation {
 		donor.setBirthDate(new Date());
 		donor.setName("saif");
 		DonorLocation loc=new DonorLocation();
-		loc.setLatitute(1234);
-		loc.setLongitute(123666666);
+		loc.setLatitude(1234);
+		loc.setLongitude(123666666);
 		donor.setLocation(loc);
 		
 		this.mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON)

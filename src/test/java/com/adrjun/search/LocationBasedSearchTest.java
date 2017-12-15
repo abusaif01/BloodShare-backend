@@ -17,8 +17,8 @@ public class LocationBasedSearchTest {
 		double lat=23.794506;
 		double log=90.424096;
 		Location loc=new Location();
-		loc.setLatitute(lat);
-		loc.setLongitute(log);
+		loc.setLatitude(lat);
+		loc.setLongitude(log);
 		double[] points = locSerach.findBoundingCoordinates(loc,100.0);
 //		assertEquals(points, locSerach.findNearLocationEntries(lat,log,30));
 		assertEquals(30, locSerach.findDistance(lat,log, points[0],points[1] ));

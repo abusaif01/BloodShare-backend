@@ -37,18 +37,18 @@ public class SpringApplicationLauncher {
 		return registrationBean;
 	}
 	
-//	@Bean
-//    public CommonsRequestLoggingFilter logFilter() {
-//        CommonsRequestLoggingFilter filter
-//          = new CommonsRequestLoggingFilter();
-//        filter.setIncludeQueryString(true);
-//        filter.setIncludePayload(true);
-//        filter.setMaxPayloadLength(100000);
-//        filter.setIncludeHeaders(false);
-//        filter.setAfterMessagePrefix("REQUEST DATA : ");
-//        return filter;
-//    }
-//	
+	@Bean
+    public CommonsRequestLoggingFilter logFilter() {
+        CommonsRequestLoggingFilter filter
+          = new CommonsRequestLoggingFilter();
+        filter.setIncludeQueryString(true);
+        filter.setIncludePayload(true);
+        filter.setMaxPayloadLength(10000000);
+        filter.setIncludeHeaders(false);
+        filter.setAfterMessagePrefix("REQUEST DATA : ");
+        return filter;
+    }
+	
 //	@Bean
 //	public FireBaseAdmin fireBase()
 //	{

@@ -41,7 +41,6 @@ public class DonorController {
 	@RequestMapping(value="/authenticate",consumes="application/json",produces="application/json", method=RequestMethod.POST)
 	public ResponseEntity<Map<String,String>> authenticate(@RequestBody Map<String,String> requestData)
 	{
-		logger.debug("requested Data "+requestData);
 		
 		Map<String,String> responseMap=new HashMap<String,String>();
 		String fireToken=requestData.get("firebase_token");

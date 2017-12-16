@@ -16,6 +16,7 @@ import com.bloodshare.dao.CookieDAO;
 import com.bloodshare.dao.DonorDAO;
 import com.bloodshare.entity.Cookie;
 import com.bloodshare.entity.Donor;
+import com.bloodshare.entity.DonorLocation;
 import com.bloodshare.util.DonorStatus;
 import com.bloodshare.util.DonorUtils;
 import com.bloodshare.util.exeption.DataMalFormException;
@@ -106,6 +107,12 @@ public class DonorServiceImpl implements DonorService
 			}
 			
 			donor.setStatus(DonorStatus.UTHENTICATED);
+			DonorLocation loc = new DonorLocation();
+			loc.setDonor(donor);
+			loc.setLatitude(0);
+			loc.setLongitude(0);
+			
+			donor.setLocation(loc);
 			donorDAO.save(donor);
 		}
 		logger.debug("******Donor : "+donor);

@@ -44,7 +44,7 @@ public class TokenFilter implements Filter
 		if(request.getRequestURI().contains( "/authenticate") || request.getRequestURI().equals("/") 
 				|| request.getRequestURI().contains("docs/api.html") )
 		{
-			logger.debug("skipping /authenticate");
+			logger.debug("skipping token authenticate");
 			chain.doFilter(req, res);
 			return;
 		}
@@ -59,7 +59,6 @@ public class TokenFilter implements Filter
 		}
 		String token = authHeader.substring(TOKEN_PREFIX.length());
 		
-		logger.debug("Donor service "+donorService);
 		Donor donor=donorService.getDonorWithCookie(token);
 		logger.debug("Donor "+donor);
 		if(donor==null)
@@ -70,7 +69,6 @@ public class TokenFilter implements Filter
 		}
 		
 		request.setAttribute("session_donor", donor);
-		logger.debug("Donor dlf;kjdslkajfal;dkjflkds");
 		chain.doFilter(req, res);
 	}
 	

@@ -39,14 +39,14 @@ public class DonorDAOImpl implements DonorDAO
 
 	@Override
 	public Donor update(Donor t) {
-		Session session = sessionFactory.getCurrentSession();
 		if(t.getLocation()!=null)
 		{
 			t.getLocation().setDonor(t);
 			t.getLocation().setId(t.getId());
 		}
 		logger.debug("\n\n****Donor that is going to Merge Afrer"+t);
-		session.merge(t);
+		Session session = sessionFactory.getCurrentSession();
+		session.update(t);
 		logger.debug("Donor updated");
 		return t;
 	}

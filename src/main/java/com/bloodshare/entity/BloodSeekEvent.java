@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -37,8 +38,13 @@ public class BloodSeekEvent {
 	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
 	private Date createdDate; 
 	
-	@OneToOne(mappedBy="event",fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
-	private EventLocation location;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="hospital_id",insertable=false,updatable=false)
+	private Hospital hospital;
+	
+	@Column(name="hospital_id")
+	private int hospitalId;
 	
 	@Column(name="image")
 	private String image;
@@ -97,13 +103,21 @@ public class BloodSeekEvent {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
-	public EventLocation getLocation() {
-		return location;
+	
+	public int getHospitalId() {
+		return hospitalId;
 	}
 
-	public void setLocation(EventLocation location) {
-		this.location = location;
+	public void setHospitalId(int hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
 	}
 
 	public String getImage() {

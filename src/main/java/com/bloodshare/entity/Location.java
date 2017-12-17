@@ -9,9 +9,9 @@ public class Location {
 	@Column 
 	private String name;
 	@Column
-	private double latitude;
+	private double latitude=0;
 	@Column
-	private double longitude;
+	private double longitude=0;
 	
 	
 	

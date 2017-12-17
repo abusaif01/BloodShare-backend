@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.bloodshare.entity.BloodSeekEvent;
-import com.bloodshare.entity.EventLocation;
+import com.bloodshare.entity.Hospital;
 import com.bloodshare.filter.TokenFilter;
 
 @RunWith(SpringRunner.class)
@@ -71,10 +71,10 @@ public class BloodEventTest {
 		BloodSeekEvent event=new BloodSeekEvent();
 		event.setBooldGroup("0+");
 		event.setQunatity(5);
-		EventLocation location=new EventLocation();
+		Hospital location=new Hospital();
 		location.setLatitude(23.833854);
 		location.setLongitude(90.386559);
-		event.setLocation(location);
+		event.setHospital(location);
 		eventService.createNewEvent(event);
 	}
 	

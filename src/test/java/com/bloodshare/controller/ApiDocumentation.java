@@ -92,14 +92,14 @@ public class ApiDocumentation {
 		}
 	}
 	
-//	@Test
-//	public void helloTest() throws Exception
-//	{
-//		this.mockMvc.perform(get("/")) 
-//		.andExpect(status().isOk()) 
-//		.andDo(document("hello"));
-//	}
-//	
+	@Test
+	public void aaahelloTest() throws Exception
+	{
+		this.mockMvc.perform(get("/")) 
+		.andExpect(status().isOk()) 
+		.andDo(document("hello"));
+	}
+	
 	@Test
 	public void authenticateTest() throws Exception
 	{
@@ -142,23 +142,31 @@ public class ApiDocumentation {
 		.andDo(document("updateUser"));
 	}
 
+	@Test
+	public void eGetHospital() throws Exception
+	{
+		this.mockMvc.perform(get("/hospital/?key=ab")
+				.header("Authorization", "Bearer "+donorId))
+		.andExpect(status().isOk()) 
+		.andDo(document("getHospital"));
+	}
 
-//	@Test
-//	public void ecrateEventTest() throws Exception
-//	{
-//		Map<String, String> eventData = new HashMap<String, String>();
-//		eventData.put("quantity", "5");
-//		eventData.put("location", "dhaka");
-//		eventData.put("bloodGroup", "O+ve");
-//		eventData.put("birthDate", "19-09-2017");
-//		
-//		this.mockMvc.perform(post("/bloodSeekEvent/").contentType(MediaType.APPLICATION_JSON)
-//				.header("Authorization", "Bearer "+donorId)
-//				.content(this.objectMapper.writeValueAsString(eventData))) 
-//			.andExpect(status().isCreated()) 
-//			.andDo(document("createEvent"));
-//	}
-//	
+	@Test
+	public void fcrateEventTest() throws Exception
+	{
+		Map<String, String> eventData = new HashMap<String, String>();
+		eventData.put("quantity", "5");
+		eventData.put("hospitalId", "1");
+		eventData.put("bloodGroup", "O+ve");
+		eventData.put("birthDate", "19-09-2017");
+		
+		this.mockMvc.perform(post("/bloodSeekEvent/").contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", "Bearer "+donorId)
+				.content(this.objectMapper.writeValueAsString(eventData))) 
+			.andExpect(status().isCreated()) 
+			.andDo(document("createEvent"));
+	}
+	
 	
 	
 	

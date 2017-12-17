@@ -126,6 +126,24 @@ include::{snippets}/updateUser/curl-request.adoc[]
 
 include::{snippets}/updateUser/http-response.adoc[]
 
+[[hospital-management]]
+== Work with Hospital
+
+[[getHospital]]
+=== Search Hospital
+
+==== Example request
+
+include::{snippets}/getHospital/http-request.adoc[]
+
+==== Example request CURL
+
+include::{snippets}/getHospital/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/getHospital/http-response.adoc[]
+
 
 [[event-management]]
 == Blood Seek Event Management

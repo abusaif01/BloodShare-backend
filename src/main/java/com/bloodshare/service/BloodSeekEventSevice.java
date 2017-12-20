@@ -4,6 +4,6 @@ import com.bloodshare.entity.BloodSeekEvent;
 
 public interface BloodSeekEventSevice {
 	BloodSeekEvent createNewEvent(BloodSeekEvent event);
-	BloodSeekEvent getEventById(int id);
+	BloodSeekEvent getEventById(String id);
 	
 }

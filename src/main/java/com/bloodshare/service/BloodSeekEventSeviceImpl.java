@@ -45,7 +45,7 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	
 	private int calculateUserToFind(BloodSeekEvent event)
 	{
-		return (event.getQunatity()-(event.getConfirmed()+event.getWaiting()));
+		return (event.getQuantity()-(event.getConfirmed()+event.getWaiting()));
 	}
 	
 	private List<DonorLocation> searchDonorBasedOnLocation(Location location,double distanceParameter,int searchLimit)
@@ -78,7 +78,7 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 
 	@Transactional
 	@Override
-	public BloodSeekEvent getEventById(int id) {
+	public BloodSeekEvent getEventById(String id) {
 		return eventDao.read(id);
 	}
 }

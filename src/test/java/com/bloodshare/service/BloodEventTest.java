@@ -69,8 +69,8 @@ public class BloodEventTest {
 	{
 		//23.833854, 90.386559
 		BloodSeekEvent event=new BloodSeekEvent();
-		event.setBooldGroup("0+");
-		event.setQunatity(5);
+		event.setBloodGroup("0+");
+		event.setQuantity(5);
 		Hospital location=new Hospital();
 		location.setLatitude(23.833854);
 		location.setLongitude(90.386559);

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,14 +23,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class BloodSeekEvent {
 
 	@Id
-	@GeneratedValue
-	private int  id;
+	@GeneratedValue(generator="stringKey")
+	@GenericGenerator(name="stringKey", strategy = "uuid2")
+	private String  id;
 	
-	@Column(name="boold_group")
-	private String booldGroup;
+	@Column(name="blood_group")
+	private String bloodGroup;
 	
 	@Column(name="quantity")
-	private int qunatity;
+	private int quantity;
 	
 	@Column(name="target_date")
 	@JsonFormat(shape=JsonFormat.Shape.STRING , pattern="dd-MM-yyyy")
@@ -44,7 +47,7 @@ public class BloodSeekEvent {
 	private Hospital hospital;
 	
 	@Column(name="hospital_id")
-	private int hospitalId;
+	private String hospitalId;
 	
 	@Column(name="image")
 	private String image;
@@ -64,28 +67,30 @@ public class BloodSeekEvent {
 	@OneToMany(mappedBy="event",fetch=FetchType.LAZY,cascade=CascadeType.REMOVE,orphanRemoval = true)
 	List<DonorForEvent> donorForEvent;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getBooldGroup() {
-		return booldGroup;
+	
+
+	public String getBloodGroup() {
+		return bloodGroup;
 	}
 
-	public void setBooldGroup(String booldGroup) {
-		this.booldGroup = booldGroup;
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+	
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public int getQunatity() {
-		return qunatity;
-	}
-
-	public void setQunatity(int qunatity) {
-		this.qunatity = qunatity;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public Date getNeededDate() {
@@ -104,11 +109,11 @@ public class BloodSeekEvent {
 		this.createdDate = createdDate;
 	}
 	
-	public int getHospitalId() {
+	public String getHospitalId() {
 		return hospitalId;
 	}
 
-	public void setHospitalId(int hospitalId) {
+	public void setHospitalId(String hospitalId) {
 		this.hospitalId = hospitalId;
 	}
 
@@ -151,4 +156,13 @@ public class BloodSeekEvent {
 	public void setUserInNeed(Donor userInNeed) {
 		this.userInNeed = userInNeed;
 	}
+
+	@Override
+	public String toString() {
+		return "BloodSeekEvent [id=" + id + ", bloodGroup=" + bloodGroup + ", quantity=" + quantity + ", neededDate="
+				+ neededDate + ", createdDate=" + createdDate + ", hospital=" + hospital + ", hospitalId=" + hospitalId
+				+ ", image=" + image + ", confirmed=" + confirmed + ", waiting=" + waiting + ", userInNeed="
+				+ userInNeed.getId() + "]";
+	}
+	
 }

@@ -64,7 +64,7 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	
 	private int calculateUserToFind(BloodSeekEvent event)
 	{
-		return (event.getQunatity()-(event.getConfirmed()+event.getWaiting()));
+		return (event.getQuantity()-(event.getConfirmed()+event.getWaiting()));
 	}
 	
 	private List<DonorLocation> searchDonorBasedOnLocation(Location location,double distanceParameter,int searchLimit)

@@ -59,8 +59,7 @@ public class BloodSeekEventController {
 		System.out.println("INSIDE   ");
 		logger.debug("Id Found "+id);
 		logger.debug("reading event with id "+id);
-		int idInt=Integer.parseInt(id);
-		return new ResponseEntity<BloodSeekEvent>(eventService.getEventById(idInt)  ,HttpStatus.OK);
+		return new ResponseEntity<BloodSeekEvent>(eventService.getEventById(id)  ,HttpStatus.OK);
 		
 	}
 

@@ -46,7 +46,7 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	
 	@Transactional
 	@Override
-	public BloodSeekEvent getEventById(int id) {
+	public BloodSeekEvent getEventById(String id) {
 		return eventDao.read(id);
 	}
 	

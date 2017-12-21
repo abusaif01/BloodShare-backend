@@ -7,7 +7,7 @@ import com.bloodshare.entity.Donor;
 
 public interface BloodSeekEventSevice {
 	BloodSeekEvent createNewEvent(BloodSeekEvent event);
-	BloodSeekEvent getEventById(int id);
+	BloodSeekEvent getEventById(String id);
 	List<BloodSeekEvent> getUserSeekedEvent(Donor seeker);
 	List<BloodSeekEvent> getUserRespondedEvent(Donor donor);
 }

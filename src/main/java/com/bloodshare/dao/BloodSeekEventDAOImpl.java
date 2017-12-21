@@ -24,7 +24,7 @@ public class BloodSeekEventDAOImpl implements BloodSeekEventDAO
 	}
 	
 	@Override
-	public BloodSeekEvent read(Integer id) {
+	public BloodSeekEvent read(String id) {
 		Session session = sessionFactory.getCurrentSession();
 		List result = sessionFactory.getCurrentSession()
 				.createQuery("from com.bloodshare.entity.BloodSeekEvent a where a.id = :id ")
@@ -43,7 +43,7 @@ public class BloodSeekEventDAOImpl implements BloodSeekEventDAO
 	@Override
 	public BloodSeekEvent save(BloodSeekEvent t) {
 		Session session = sessionFactory.getCurrentSession();
-		int id=(int) session.save(t);
+		String id=(String) session.save(t);
 		return session.get(BloodSeekEvent.class, id);
 	}
 

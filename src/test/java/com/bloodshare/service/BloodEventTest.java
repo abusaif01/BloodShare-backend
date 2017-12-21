@@ -2,6 +2,8 @@ package com.bloodshare.service;
 
 
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.bloodshare.entity.BloodSeekEvent;
+import com.bloodshare.entity.Donor;
 import com.bloodshare.entity.Hospital;
 import com.bloodshare.filter.TokenFilter;
 
@@ -64,18 +67,26 @@ public class BloodEventTest {
 //		}
 	}
 	
+//	@Test
+//	public void eventTest()
+//	{
+//		//23.833854, 90.386559
+//		BloodSeekEvent event=new BloodSeekEvent();
+//		event.setBooldGroup("0+");
+//		event.setQunatity(5);
+//		Hospital location=new Hospital();
+//		location.setLatitude(23.833854);
+//		location.setLongitude(90.386559);
+//		event.setHospital(location);
+//		eventService.createNewEvent(event);
+//	}
+	
 	@Test
-	public void eventTest()
+	public void getSeekedEventTest()
 	{
-		//23.833854, 90.386559
-		BloodSeekEvent event=new BloodSeekEvent();
-		event.setBooldGroup("0+");
-		event.setQunatity(5);
-		Hospital location=new Hospital();
-		location.setLatitude(23.833854);
-		location.setLongitude(90.386559);
-		event.setHospital(location);
-		eventService.createNewEvent(event);
+		Donor donor=donorService.getDonorWithId(donorId);
+		List<BloodSeekEvent> list = eventService.getUserSeekedEvent(donor);
+		System.out.println(list);
 	}
 	
 }

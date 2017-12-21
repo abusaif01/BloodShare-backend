@@ -1,5 +1,9 @@
 package com.bloodshare.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,22 @@ public class BloodSeekEventController {
 	}
 
 
+	@GetMapping()
+	public ResponseEntity<Map<String,List<BloodSeekEvent>>> getEventsOfUser(@RequestAttribute(name="session_donor",required=true) Donor donor)
+	{
+		logger.debug("reading user events");
+		List<BloodSeekEvent> userSeekedEvent = eventService.getUserSeekedEvent(donor);
+		logger.debug("userSeekedEvent : "+userSeekedEvent);
+		List<BloodSeekEvent> userRespondedEvent = eventService.getUserRespondedEvent(donor);
+		logger.debug("userRespondedEvent : "+userRespondedEvent);
+		
+		Map<String,List<BloodSeekEvent>> userEvents=new HashMap<String,List<BloodSeekEvent>>();
+		userEvents.put("as_seeker", userSeekedEvent);
+		userEvents.put("as_donor", userRespondedEvent);
+		
+		return new ResponseEntity<Map<String,List<BloodSeekEvent>>>(userEvents  ,HttpStatus.OK);
+	}
+	
 
 	@GetMapping(value= "/{id}")
 	public ResponseEntity<BloodSeekEvent> getEvent(@RequestAttribute(name="session_donor",required=true) Donor donor,
@@ -38,9 +58,10 @@ public class BloodSeekEventController {
 	{
 		System.out.println("INSIDE   ");
 		logger.debug("Id Found "+id);
-		logger.debug("Id Found "+id);
+		logger.debug("reading event with id "+id);
 		int idInt=Integer.parseInt(id);
 		return new ResponseEntity<BloodSeekEvent>(eventService.getEventById(idInt)  ,HttpStatus.OK);
+		
 	}
 
 	@RequestMapping(method= RequestMethod.POST)

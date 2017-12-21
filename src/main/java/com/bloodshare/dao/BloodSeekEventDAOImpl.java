@@ -2,12 +2,15 @@ package com.bloodshare.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bloodshare.entity.BloodSeekEvent;
+import com.bloodshare.entity.Donor;
 
 @Repository
 public class BloodSeekEventDAOImpl implements BloodSeekEventDAO
@@ -47,6 +50,20 @@ public class BloodSeekEventDAOImpl implements BloodSeekEventDAO
 	@Override
 	public boolean delete(BloodSeekEvent t) {
 		return false;
+	}
+
+	@Override
+	public List<BloodSeekEvent> getEventBySeeker(Donor donor) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(BloodSeekEvent.class);
+		criteria.add(Restrictions.eq("userInNeed", donor));
+		return criteria.list();
+	}
+
+	@Override
+	public List<BloodSeekEvent> getEventByDonor(Donor donor) {
+		
+		return null;
 	}
 
 }

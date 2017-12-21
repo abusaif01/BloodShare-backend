@@ -67,7 +67,7 @@ use of HTTP status codes.
 
 A simple hello world API to test if everything is working ok.
 
-==== Example response
+====== Example response
 
 include::{snippets}/hello/http-response.adoc[]
 
@@ -81,15 +81,15 @@ include::{snippets}/hello/http-response.adoc[]
 
 Authenticate With OTP 
 
-==== Example request HTTP
+====== Example request HTTP
 
 include::{snippets}/authenticate/http-request.adoc[]
 
-==== Example request CURL
+===== Example request CURL
 
 include::{snippets}/authenticate/curl-request.adoc[]
 
-==== Example response
+===== Example response
 
 include::{snippets}/authenticate/http-response.adoc[]
 
@@ -99,11 +99,11 @@ include::{snippets}/authenticate/http-response.adoc[]
 
 Read User .
 
-==== Example request
+===== Example request
 
 include::{snippets}/getDonor/http-request.adoc[]
 
-==== Example response
+===== Example response
 
 include::{snippets}/getDonor/http-response.adoc[]
 
@@ -113,16 +113,16 @@ include::{snippets}/getDonor/http-response.adoc[]
 
 Update Donor data With JSON
 
-==== Example request
+===== Example request
 
 include::{snippets}/updateUser/http-request.adoc[]
 
 
-==== Example request CURL
+===== Example request CURL
 
 include::{snippets}/updateUser/curl-request.adoc[]
 
-==== Example response
+===== Example response
 
 include::{snippets}/updateUser/http-response.adoc[]
 
@@ -132,15 +132,15 @@ include::{snippets}/updateUser/http-response.adoc[]
 [[getHospital]]
 === Search Hospital
 
-==== Example request
+===== Example request
 
 include::{snippets}/getHospital/http-request.adoc[]
 
-==== Example request CURL
+===== Example request CURL
 
 include::{snippets}/getHospital/curl-request.adoc[]
 
-==== Example response
+===== Example response
 
 include::{snippets}/getHospital/http-response.adoc[]
 
@@ -154,15 +154,54 @@ include::{snippets}/getHospital/http-response.adoc[]
 
 Create  Event  With JSON
 
-==== Example request
+===== Example request
 
 include::{snippets}/createEvent/http-request.adoc[]
 
 
-==== Example request CURL
+===== Example request CURL
 
 include::{snippets}/createEvent/curl-request.adoc[]
 
-==== Example response
+===== Example response
 
 include::{snippets}/createEvent/http-response.adoc[]
+
+
+
+[[getEvent]]
+=== Get Events
+
+Get event works in two way. If any id passed as path variable then only details of that event will be provide. If no Id is provided then all devent related to this user will be provided. All event will come in two category, 1) event which this user posted as seeker and 2) event where this user responded as a donor.
+
+==== 1) Get Event By Event Id.
+
+===== Example request
+
+include::{snippets}/eventById/http-request.adoc[]
+
+
+===== Example request CURL
+
+include::{snippets}/eventById/curl-request.adoc[]
+
+===== Example response
+
+include::{snippets}/eventById/http-response.adoc[]
+
+
+==== 2) Get All event related to user.
+
+
+===== Example request
+
+include::{snippets}/eventOfUser/http-request.adoc[]
+
+
+===== Example request CURL
+
+include::{snippets}/eventOfUser/curl-request.adoc[]
+
+===== Example response
+
+include::{snippets}/eventOfUser/http-response.adoc[]

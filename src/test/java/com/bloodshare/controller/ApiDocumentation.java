@@ -167,9 +167,25 @@ public class ApiDocumentation {
 			.andDo(document("createEvent"));
 	}
 	
+	@Test
+	public void ggetEventByIdTest() throws Exception
+	{
+		
+		this.mockMvc.perform(get("/bloodSeekEvent/1").contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", "Bearer "+donorId)) 
+			.andExpect(status().isOk()) 
+			.andDo(document("eventById"));
+	}
 	
-	
-	
+	@Test
+	public void hgetEventByOfUserTest() throws Exception
+	{
+		
+		this.mockMvc.perform(get("/bloodSeekEvent").contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", "Bearer "+donorId)) 
+			.andExpect(status().isOk()) 
+			.andDo(document("eventOfUser"));
+	}
 	
 	
 	

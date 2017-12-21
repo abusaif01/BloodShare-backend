@@ -29,6 +29,7 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 	
 
 
+	
 	@Override
 	@Transactional
 	public BloodSeekEvent createNewEvent(BloodSeekEvent event) {
@@ -41,6 +42,24 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 		
 		return event;
 		
+	}
+	
+	@Transactional
+	@Override
+	public BloodSeekEvent getEventById(int id) {
+		return eventDao.read(id);
+	}
+	
+	@Transactional
+	@Override
+	public List<BloodSeekEvent> getUserSeekedEvent(Donor seeker) {
+		return eventDao.getEventBySeeker(seeker);
+	}
+	
+	@Transactional
+	@Override
+	public List<BloodSeekEvent> getUserRespondedEvent(Donor donor) {
+		return eventDao.getEventByDonor(donor);
 	}
 	
 	private int calculateUserToFind(BloodSeekEvent event)
@@ -76,9 +95,4 @@ public class BloodSeekEventSeviceImpl implements BloodSeekEventSevice
 		
 	}
 
-	@Transactional
-	@Override
-	public BloodSeekEvent getEventById(int id) {
-		return eventDao.read(id);
-	}
 }

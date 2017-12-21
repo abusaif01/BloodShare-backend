@@ -17,7 +17,7 @@ public class DonorForEventPk implements Serializable
 	private String donorId;
 	
 	@Column(name="event_id")
-	private String eventId;
+	private int eventId;
 
 	public String getDonorId() {
 		return donorId;
@@ -27,11 +27,11 @@ public class DonorForEventPk implements Serializable
 		this.donorId = donorId;
 	}
 
-	public String getEventId() {
+	public int getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(String eventId) {
+	public void setEventId(int eventId) {
 		this.eventId = eventId;
 	}
 	

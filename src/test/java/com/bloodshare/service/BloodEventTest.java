@@ -84,21 +84,9 @@ public class BloodEventTest {
 	@Test
 	public void getSeekedEventTest()
 	{
-<<<<<<< HEAD
 		Donor donor=donorService.getDonorWithId(donorId);
 		List<BloodSeekEvent> list = eventService.getUserSeekedEvent(donor);
 		System.out.println(list);
-=======
-		//23.833854, 90.386559
-		BloodSeekEvent event=new BloodSeekEvent();
-		event.setBloodGroup("0+");
-		event.setQuantity(5);
-		Hospital location=new Hospital();
-		location.setLatitude(23.833854);
-		location.setLongitude(90.386559);
-		event.setHospital(location);
-		eventService.createNewEvent(event);
->>>>>>> a367a0e90bdac3780e3f1f3fc9a8bbe6397eeb3d
 	}
 	
 }

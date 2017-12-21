@@ -1,6 +1,7 @@
 package com.bloodshare.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,13 +17,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import com.bloodshare.entity.Hospital;
+import com.bloodshare.service.DonorService;
 import com.bloodshare.service.HospitalService;
+import com.bloodshare.service.MiscService;
 
 @RestController
 public class MiscController {
@@ -37,6 +41,9 @@ public class MiscController {
 	 
 	 @Autowired
 	 HospitalService hospitalService;
+	 @Autowired
+	 MiscService miscService;
+	 @Autowired
 	 
 	 @RequestMapping(value="/help", method=RequestMethod.GET)
 	 public String show(Model model) {
@@ -73,5 +80,13 @@ public class MiscController {
 	{
 		logger.debug("hospital searching key "+quesrySting);
 		return new ResponseEntity<List<Hospital>>( hospitalService.searchHospitalsWithName(quesrySting),HttpStatus.OK);
+	}
+	@GetMapping(value="/statistics")
+	@ResponseBody
+	public Map<String,Integer> getStatistics()
+	{
+		logger.debug("statistics collecting ");
+		
+		return miscService.getSatisticsData();
 	}
 }

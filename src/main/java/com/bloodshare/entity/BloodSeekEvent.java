@@ -46,7 +46,11 @@ public class BloodSeekEvent {
 	@JoinColumn(name="hospital_id",insertable=false,updatable=false)
 	private Hospital hospital;
 	
+<<<<<<< HEAD
 	@Column(name="hospital_id",nullable=false)
+=======
+	@Column(name="hospital_id")
+>>>>>>> a367a0e90bdac3780e3f1f3fc9a8bbe6397eeb3d
 	private String hospitalId;
 	
 	@Column(name="image")

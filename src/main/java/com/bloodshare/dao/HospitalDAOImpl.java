@@ -22,7 +22,7 @@ public class HospitalDAOImpl implements HospitalDAO
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Hospital read(Integer id) {
+	public Hospital read(String id) {
 		return null;
 	}
 

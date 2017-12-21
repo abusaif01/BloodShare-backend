@@ -4,18 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Hospital extends Location
 {
 
 	@Id
-	@GeneratedValue
-	private int  id;
+	@GeneratedValue(generator="stringKey")
+	@GenericGenerator(name="stringKey", strategy = "uuid2")
+	private String  id;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

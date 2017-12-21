@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bloodshare.entity.Hospital;
 
-public interface HospitalDAO extends GenericDAO<Hospital, Integer>
+public interface HospitalDAO extends GenericDAO<Hospital, String>
 {
 	public List<Hospital> getHospitalWithNameMatch(String name);
 }
